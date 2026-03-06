@@ -202,18 +202,18 @@ export default function WhatWeDo() {
               <div className="relative h-full glass-card p-8 hover:scale-105 transition-transform duration-300 overflow-hidden">
                 {/* Glow Effect (CaseStudies style) */}
                 <div 
-                  className={`absolute -inset-1 bg-gradient-to-r ${capability.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
+                  className={`absolute -inset-1 bg-linear-to-r ${capability.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
                 />
                 {/* Subtle Background Pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
                 </div>
                 {/* Content - Ensure it's above all backgrounds */}
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="relative mb-6">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-[#FF2E9F]/10 to-[#5B6CFF]/10 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-2xl bg-linear-to-r from-[#FF2E9F]/10 to-[#5B6CFF]/10 flex items-center justify-center">
                       <span className="text-4xl transform group-hover:scale-110 transition-transform duration-300">
                         {capability.icon}
                       </span>
@@ -234,7 +234,7 @@ export default function WhatWeDo() {
                   <div className="space-y-2">
                     {capability.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mr-2" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] mr-2" />
                         {feature}
                       </div>
                     ))}

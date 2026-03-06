@@ -214,7 +214,7 @@ export default function WhyChooseUs() {
 
               {/* Benefit Card */}
               <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F]/0 via-[#5B6CFF]/5 to-[#FF2E9F]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl" />
+                <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F]/0 via-[#5B6CFF]/5 to-[#FF2E9F]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl" />
                 
                 <div className="relative glass-card p-8 md:p-10 hover:scale-[1.01] transition-transform duration-500">
                   {/* Content Grid */}
@@ -224,7 +224,7 @@ export default function WhyChooseUs() {
                       <div className="flex items-center gap-4">
                         {/* Icon with Gradient */}
                         <div className="relative">
-                          <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${benefit.gradient} blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
+                          <div className={`absolute inset-0 rounded-2xl bg-linear-to-r ${benefit.gradient} blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
                           <div className="relative w-16 h-16 rounded-2xl bg-midnight border border-white/10 flex items-center justify-center">
                             <span className="text-3xl transform group-hover:scale-110 transition-transform duration-500">
                               {benefit.icon}
@@ -236,7 +236,7 @@ export default function WhyChooseUs() {
                           <h3 className="text-2xl font-bold group-hover:gradient-text transition-all duration-300">
                             {benefit.title}
                           </h3>
-                          <div className={`text-sm font-medium mt-1 bg-gradient-to-r ${benefit.gradient} bg-clip-text text-transparent`}>
+                          <div className={`text-sm font-medium mt-1 bg-linear-to-r ${benefit.gradient} bg-clip-text text-transparent`}>
                             {benefit.stats}
                           </div>
                         </div>
@@ -255,7 +255,7 @@ export default function WhyChooseUs() {
                       <div className="grid grid-cols-2 gap-3">
                         {benefit.details.map((detail, idx) => (
                           <div key={idx} className="flex items-start gap-2">
-                            <div className={`w-1.5 h-1.5 rounded-full mt-1.5 bg-gradient-to-r ${benefit.gradient}`} />
+                            <div className={`w-1.5 h-1.5 rounded-full mt-1.5 bg-linear-to-r ${benefit.gradient}`} />
                             <span className="text-sm text-gray-400">{detail}</span>
                           </div>
                         ))}
@@ -264,7 +264,7 @@ export default function WhyChooseUs() {
                   </div>
 
                   {/* Bottom Accent Line */}
-                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-1/2 h-0.5 bg-gradient-to-r ${benefit.gradient} transition-all duration-700 opacity-50`} />
+                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 group-hover:w-1/2 h-0.5 bg-linear-to-r ${benefit.gradient} transition-all duration-700 opacity-50`} />
                 </div>
               </div>
             </motion.div>

@@ -82,12 +82,12 @@ export default function EngineeringCapabilities() {
       
       {/* Animated Grid Lines */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-[#5B6CFF] to-transparent" />
-        <div className="absolute top-0 left-2/4 w-px h-full bg-gradient-to-b from-transparent via-[#FF2E9F] to-transparent" />
-        <div className="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-transparent via-[#5B6CFF] to-transparent" />
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF2E9F] to-transparent" />
-        <div className="absolute top-2/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#5B6CFF] to-transparent" />
-        <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF2E9F] to-transparent" />
+        <div className="absolute top-0 left-1/4 w-px h-full bg-linear-to-b from-transparent via-[#5B6CFF] to-transparent" />
+        <div className="absolute top-0 left-2/4 w-px h-full bg-linear-to-b from-transparent via-[#FF2E9F] to-transparent" />
+        <div className="absolute top-0 left-3/4 w-px h-full bg-linear-to-b from-transparent via-[#5B6CFF] to-transparent" />
+        <div className="absolute top-1/4 left-0 w-full h-px bg-linear-to-r from-transparent via-[#FF2E9F] to-transparent" />
+        <div className="absolute top-2/4 left-0 w-full h-px bg-linear-to-r from-transparent via-[#5B6CFF] to-transparent" />
+        <div className="absolute top-3/4 left-0 w-full h-px bg-linear-to-r from-transparent via-[#FF2E9F] to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,12 +129,12 @@ export default function EngineeringCapabilities() {
               <div className="relative h-full glass-card p-8 hover:scale-[1.02] transition-all duration-500 overflow-hidden">
                 {/* Glow Effect (CaseStudies style) */}
                 <div 
-                  className={`absolute -inset-1 bg-gradient-to-r ${capability.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
+                  className={`absolute -inset-1 bg-linear-to-r ${capability.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
                 />
                 {/* Subtle Background Pattern */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
                 </div>
                 {/* Content */}
                 <div className="relative z-10">
@@ -143,7 +143,7 @@ export default function EngineeringCapabilities() {
                     <div className="flex items-center gap-4">
                       {/* Icon with Gradient Border */}
                       <div className="relative">
-                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${capability.gradient} blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
+                        <div className={`absolute inset-0 rounded-2xl bg-linear-to-r ${capability.gradient} blur-md opacity-50 group-hover:opacity-100 transition-opacity duration-500`} />
                         <div className="relative w-16 h-16 rounded-2xl bg-midnight border border-white/10 flex items-center justify-center overflow-hidden">
                           <span className="text-3xl transform group-hover:scale-110 transition-transform duration-500">
                             {capability.icon}
@@ -175,7 +175,7 @@ export default function EngineeringCapabilities() {
                   </p>
 
                   {/* Expertise Badge */}
-                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-6 bg-gradient-to-r ${capability.gradient} bg-opacity-10 text-white`}>
+                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-6 bg-linear-to-r ${capability.gradient} bg-opacity-10 text-white`}>
                     {capability.expertise}
                   </div>
 
@@ -211,7 +211,7 @@ export default function EngineeringCapabilities() {
                         <div className="grid grid-cols-2 gap-2">
                           {capability.deliverables.map((item, idx) => (
                             <div key={idx} className="flex items-center text-xs text-gray-400">
-                              <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mr-2" />
+                              <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] mr-2" />
                               {item}
                             </div>
                           ))}
@@ -256,7 +256,7 @@ export default function EngineeringCapabilities() {
         >
           <div className="glass-card inline-block p-1">
             <div className="flex flex-col sm:flex-row gap-2">
-              <button className="px-8 py-4 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg font-medium hover:opacity-90 transition-opacity">
+              <button className="px-8 py-4 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg font-medium hover:opacity-90 transition-opacity">
                 Discuss Your Project
               </button>
               <button className="px-8 py-4 rounded-lg font-medium hover:bg-white/5 transition-colors">
