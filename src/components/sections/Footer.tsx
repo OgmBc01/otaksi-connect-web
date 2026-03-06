@@ -115,8 +115,8 @@ export default function Footer() {
               {/* Logo */}
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg blur-md opacity-50" />
-                  <div className="relative w-10 h-10 rounded-lg bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg blur-md opacity-50" />
+                  <div className="relative w-10 h-10 rounded-lg bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
                     <span className="text-white font-bold text-xl">OC</span>
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -169,7 +169,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -187,7 +187,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -205,7 +205,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -229,13 +229,13 @@ export default function Footer() {
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 0.2 }}
                       transition={{ duration: 0.2 }}
-                      className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-lg`}
+                      className={`absolute inset-0 bg-linear-to-r ${social.color} rounded-lg`}
                     />
                     <motion.div 
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 0.3 }}
                       transition={{ duration: 0.2 }}
-                      className={`absolute inset-0 bg-gradient-to-r ${social.color} rounded-lg blur-md`}
+                      className={`absolute inset-0 bg-linear-to-r ${social.color} rounded-lg blur-md`}
                     />
                     
                     {/* Icon */}
@@ -296,7 +296,7 @@ export default function Footer() {
                 repeat: Infinity,
                 ease: 'linear',
               }}
-              className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-[#5B6CFF] to-transparent"
+              className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-[#5B6CFF] to-transparent"
             />
           </div>
         </motion.div>
