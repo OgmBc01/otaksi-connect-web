@@ -3,6 +3,7 @@
 import Hero from '../src/components/sections/Hero'
 import WhatWeDo from '../src/components/sections/WhatWeDo'
 import Industries from '../src/components/sections/Industries'
+import EngineeringCapabilities from '../src/components/sections/EngineeringCapabilities'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <WhatWeDo />
       <Industries />
+      <EngineeringCapabilities />
     </main>
   )
 }
