@@ -2,6 +2,7 @@
 
 import Hero from '../src/components/sections/Hero'
 import WhatWeDo from '../src/components/sections/WhatWeDo'
+import Industries from '../src/components/sections/Industries'
 
 export default function Home() {
   return (
@@ -13,6 +14,9 @@ export default function Home() {
     }}>
       <Hero />
       <WhatWeDo />
+      <Industries />
     </main>
   )
 }
+
+
