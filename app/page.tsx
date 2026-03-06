@@ -6,6 +6,7 @@ import Industries from '../src/components/sections/Industries'
 import EngineeringCapabilities from '../src/components/sections/EngineeringCapabilities'
 import WhyChooseUs from '../src/components/sections/WhyChooseUs'
 import CaseStudies from '../src/components/sections/CaseStudies'
+import TechnologyStack from '../src/components/sections/TechnologyStack'
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <EngineeringCapabilities />
       <WhyChooseUs />
       <CaseStudies />
+      <TechnologyStack />
       
     </main>
   )
