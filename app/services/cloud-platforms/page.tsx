@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
-import Hero from '@/components/services/cloud-platforms/Hero'
-import OurApproach from '@/components/services/cloud-platforms/OurApproach'
-import Services from '@/components/services/cloud-platforms/Services'
-import Technologies from '@/components/services/cloud-platforms/Technologies'
-import Process from '@/components/services/cloud-platforms/Process'
-import CaseStudies from '@/components/services/cloud-platforms/CaseStudies'
-import WhyChooseUs from '@/components/services/cloud-platforms/WhyChooseUs'
-import FAQ from '@/components/services/cloud-platforms/FAQ'
-import CTASection from '@/components/services/cloud-platforms/CTASection'
+import Hero from '../../../src/components/services/cloud-platforms/Hero'
+import OurApproach from '../../../src/components/services/cloud-platforms/OurApproach'
+import Services from '../../../src/components/services/cloud-platforms/Services'
+import Technologies from '../../../src/components/services/cloud-platforms/Technologies'
+import Process from '../../../src/components/services/cloud-platforms/Process'
+import CaseStudies from '../../../src/components/services/cloud-platforms/CaseStudies'
+import WhyChooseUs from '../../../src/components/services/cloud-platforms/WhyChooseUs'
+import FAQ from '../../../src/components/services/cloud-platforms/FAQ'
+import CTASection from '../../../src/components/services/cloud-platforms/CTASection'
 
 export const metadata: Metadata = {
   title: 'Cloud Platforms & Infrastructure Services Dubai | AWS, Azure, GCP',
