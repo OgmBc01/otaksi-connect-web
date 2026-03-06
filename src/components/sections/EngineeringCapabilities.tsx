@@ -127,16 +127,15 @@ export default function EngineeringCapabilities() {
             >
               {/* Premium Card */}
               <div className="relative h-full glass-card p-8 hover:scale-[1.02] transition-all duration-500 overflow-hidden">
-                {/* Gradient Background on Hover */}
+                {/* Glow Effect (CaseStudies style) */}
                 <div 
-                  className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 bg-gradient-to-r ${capability.gradient}`}
+                  className={`absolute -inset-1 bg-gradient-to-r ${capability.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
                 />
-                
-                {/* Glow Effect */}
-                <div 
-                  className={`absolute -inset-1 opacity-0 group-hover:opacity-20 transition-opacity duration-700 bg-gradient-to-r ${capability.gradient} blur-xl`}
-                />
-
+                {/* Subtle Background Pattern */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
+                </div>
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Header with Icon and Expand Indicator */}

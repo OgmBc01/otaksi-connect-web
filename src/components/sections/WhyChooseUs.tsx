@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const benefits = [
   {
@@ -141,21 +141,32 @@ export default function WhyChooseUs() {
     },
   }
 
+  // Hydration-safe random binary background
+  const [binaryRows, setBinaryRows] = useState<string[]>([]);
+  useEffect(() => {
+    const rows: string[] = [];
+    for (let i = 0; i < 50; i++) {
+      let row = '';
+      for (let j = 0; j < 20; j++) {
+        row += Math.random() > 0.5 ? '1 ' : '0 ';
+      }
+      rows.push(row.trim());
+    }
+    setBinaryRows(rows);
+  }, []);
+
   return (
     <section className="relative py-24 bg-midnight overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-glow" />
-      
       {/* Binary Code Background (subtle) */}
       <div className="absolute inset-0 opacity-5 text-[#5B6CFF] text-xs overflow-hidden select-none">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <div key={i} className="whitespace-nowrap" style={{ 
+        {binaryRows.map((row, i) => (
+          <div key={i} className="whitespace-nowrap" style={{
             transform: `translateY(${i * 30}px) translateX(${Math.sin(i) * 20}px)`,
             animation: `float ${5 + i % 3}s linear infinite`
           }}>
-            {Array.from({ length: 20 }).map(() => 
-              Math.random() > 0.5 ? '1' : '0'
-            ).join(' ')}
+            {row}
           </div>
         ))}
       </div>

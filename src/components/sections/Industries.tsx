@@ -268,16 +268,15 @@ export default function Industries() {
               onHoverEnd={() => setHoveredIndex(null)}
             >
               <div className="relative h-full glass-card p-6 hover:scale-[1.02] transition-all duration-300 overflow-hidden">
-                {/* Hover Gradient Background */}
+                {/* Glow Effect (CaseStudies style) */}
                 <div 
-                  className={`absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-r ${industry.gradient}`}
+                  className={`absolute -inset-1 bg-gradient-to-r ${industry.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
                 />
-                
-                {/* Glow Effect */}
-                <div 
-                  className={`absolute -inset-1 opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-gradient-to-r ${industry.gradient} blur-xl`}
-                />
-
+                {/* Subtle Background Pattern */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
+                </div>
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Header with Icon and Title */}
