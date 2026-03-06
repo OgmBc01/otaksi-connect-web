@@ -50,4 +50,84 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
+  /* Custom animation for pulse-slow */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.15; }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+}
+
+/* Pulse Animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.15; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-slow-hero {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-slow-hero {
+  animation: pulse-slow-hero 4s ease-in-out infinite;
+}
+
+/* Animation Delays */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Data Stream Animation */
+@keyframes data-stream {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-data-stream {
+  animation: data-stream 2s linear infinite;
+}
+
+/* Float Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF];
+}
+
+/* Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
 }

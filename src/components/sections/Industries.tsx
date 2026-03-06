@@ -407,8 +407,8 @@ export default function Industries() {
       {/* Enhanced Techy Background */}
       <div className="absolute inset-0">
         {/* Gradient Orbs */}
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse-slow" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse-slow animation-delay-2000" />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse-slow" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse-slow animation-delay-2000" />
         
         {/* Animated Canvas Background */}
         <canvas
@@ -496,22 +496,22 @@ export default function Industries() {
               <div className="relative h-full">
                 {/* Glow Effect - Matching Case Studies exactly */}
                 <div 
-                  className={`absolute -inset-0.5 bg-gradient-to-r ${industry.gradient} rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500`}
+                  className={`absolute -inset-0.5 bg-linear-to-r ${industry.gradient} rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500`}
                 />
                 
                 {/* Card with Border */}
                 <div className="relative h-full glass-card p-6 transition-all duration-300 rounded-2xl border border-white/10 group-hover:border-white/20">
                   {/* Background Pattern - Matching Case Studies */}
                   <div className="absolute inset-0 opacity-5 rounded-2xl overflow-hidden">
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-r ${industry.gradient} rounded-full blur-3xl`} />
-                    <div className={`absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-r ${industry.gradient} rounded-full blur-3xl`} />
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-linear-to-r ${industry.gradient} rounded-full blur-3xl`} />
+                    <div className={`absolute bottom-0 left-0 w-32 h-32 bg-linear-to-r ${industry.gradient} rounded-full blur-3xl`} />
                   </div>
 
                   {/* Content */}
                   <div className="relative z-10">
                     {/* Header with Icon and Title */}
                     <div className="flex items-start justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${industry.gradient} bg-opacity-10 flex items-center justify-center border border-white/10`}>
+                      <div className={`w-12 h-12 rounded-xl bg-linear-to-r ${industry.gradient} bg-opacity-10 flex items-center justify-center border border-white/10`}>
                         <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
                           {industry.icon}
                         </span>
@@ -540,7 +540,7 @@ export default function Industries() {
                     </p>
 
                     {/* Stats Badge - Always visible like in Case Studies */}
-                    <div className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-3 bg-gradient-to-r ${industry.gradient} bg-opacity-10 text-white border border-white/5`}>
+                    <div className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-3 bg-linear-to-r ${industry.gradient} bg-opacity-10 text-white border border-white/5`}>
                       {industry.stats}
                     </div>
 
@@ -602,18 +602,7 @@ export default function Industries() {
       </div>
 
       {/* Animation Keyframes */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.15; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
+      {/* Animation classes moved to globals.css */}
     </section>
   )
 }

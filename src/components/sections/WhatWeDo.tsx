@@ -521,18 +521,7 @@ export default function WhatWeDo() {
       </div>
 
       {/* Animation Keyframes */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.15; }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
+      {/* Animation classes moved to globals.css */}
     </section>
   )
 }
