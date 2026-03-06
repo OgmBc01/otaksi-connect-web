@@ -172,7 +172,7 @@ export default function CaseStudies() {
               >
                 {/* Glow Effect */}
                 <div 
-                  className={`absolute -inset-1 bg-gradient-to-r ${study.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 ${
+                  className={`absolute -inset-1 bg-linear-to-r ${study.gradient} rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 ${
                     expandedId === study.id ? 'opacity-40' : ''
                   }`} 
                 />
@@ -183,8 +183,8 @@ export default function CaseStudies() {
                 }`}>
                   {/* Background Pattern */}
                   <div className="absolute inset-0 opacity-5">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full blur-3xl" />
                   </div>
 
                   {/* Content */}
@@ -193,7 +193,7 @@ export default function CaseStudies() {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         {/* Icon/Image Placeholder */}
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${study.gradient} bg-opacity-10 flex items-center justify-center text-2xl`}>
+                        <div className={`w-12 h-12 rounded-xl bg-linear-to-r ${study.gradient} bg-opacity-10 flex items-center justify-center text-2xl`}>
                           {study.image}
                         </div>
                         <div>
@@ -223,7 +223,7 @@ export default function CaseStudies() {
                     </div>
 
                     {/* Result Badge (always visible) */}
-                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 bg-gradient-to-r ${study.gradient} bg-opacity-10 text-white`}>
+                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 bg-linear-to-r ${study.gradient} bg-opacity-10 text-white`}>
                       {study.results}
                     </div>
 
@@ -242,7 +242,7 @@ export default function CaseStudies() {
                             <div className="grid md:grid-cols-2 gap-6">
                               <div>
                                 <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                                  <span className="w-1 h-4 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full" />
+                                  <span className="w-1 h-4 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full" />
                                   Challenge
                                 </h4>
                                 <p className="text-sm text-gray-400 leading-relaxed">
@@ -251,7 +251,7 @@ export default function CaseStudies() {
                               </div>
                               <div>
                                 <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center gap-2">
-                                  <span className="w-1 h-4 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full" />
+                                  <span className="w-1 h-4 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full" />
                                   Solution
                                 </h4>
                                 <p className="text-sm text-gray-400 leading-relaxed">
@@ -266,7 +266,7 @@ export default function CaseStudies() {
                               <div className="grid grid-cols-2 gap-3">
                                 {study.impact.map((item, idx) => (
                                   <div key={idx} className="flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]" />
                                     <span className="text-sm text-gray-400">{item}</span>
                                   </div>
                                 ))}
@@ -299,7 +299,7 @@ export default function CaseStudies() {
                           <div className="flex gap-4">
                             {study.impact.slice(0, 2).map((item, idx) => (
                               <div key={idx} className="flex items-center gap-1 text-xs text-gray-500">
-                                <span className="w-1 h-1 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]" />
+                                <span className="w-1 h-1 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]" />
                                 {item}
                               </div>
                             ))}
