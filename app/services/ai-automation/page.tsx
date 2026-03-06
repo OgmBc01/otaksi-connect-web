@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
-import Hero from '@/components/services/ai-automation/Hero'
-import OurApproach from '@/components/services/ai-automation/OurApproach'
-import Technologies from '@/components/services/ai-automation/Technologies'
-import Solutions from '@/components/services/ai-automation/Solutions'
-import DevelopmentProcess from '@/components/services/ai-automation/DevelopmentProcess'
-import CaseStudies from '@/components/services/ai-automation/CaseStudies'
-import WhyChooseUs from '@/components/services/ai-automation/WhyChooseUs'
-import FAQ from '@/components/services/ai-automation/FAQ'
-import CTASection from '@/components/services/ai-automation/CTASection'
+import Hero from '../../../src/components/services/ai-automation/Hero'
+import OurApproach from '../../../src/components/services/ai-automation/OurApproach'
+import Technologies from '../../../src/components/services/ai-automation/Technologies'
+import Solutions from '../../../src/components/services/ai-automation/Solutions'
+import DevelopmentProcess from '../../../src/components/services/ai-automation/DevelopmentProcess'
+import CaseStudies from '../../../src/components/services/ai-automation/CaseStudies'
+import WhyChooseUs from '../../../src/components/services/ai-automation/WhyChooseUs'
+import FAQ from '../../../src/components/services/ai-automation/FAQ'
+import CTASection from '../../../src/components/services/ai-automation/CTASection'
 
 export const metadata: Metadata = {
   title: 'AI & Automation Services Dubai | Machine Learning, Computer Vision, NLP',
