@@ -1,5 +1,7 @@
 
+
 import Hero from '../src/components/sections/Hero'
+import WhatWeDo from '../src/components/sections/WhatWeDo'
 
 export default function Home() {
   return (
@@ -10,6 +12,7 @@ export default function Home() {
       padding: 0
     }}>
       <Hero />
+      <WhatWeDo />
     </main>
   )
 }
