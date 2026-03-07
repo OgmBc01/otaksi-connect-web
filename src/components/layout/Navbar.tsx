@@ -16,7 +16,7 @@ const navLinks = [
       { name: 'Cloud Platforms', href: '/services/cloud-platforms', description: 'Scalable cloud infrastructure' },
       { name: 'Enterprise Systems', href: '/services/enterprise-systems', description: 'ERP, CRM & business solutions' },
       { name: 'Digital Transformation', href: '/services/digital-transformation', description: 'End-to-end digital strategy' },
-      { name: 'DevOps & SRE', href: '/services/devops', description: 'CI/CD, monitoring & reliability' },
+      { name: 'DevOps & SRE', href: '/services/devops-sre', description: 'CI/CD, monitoring & reliability' },
     ]
   },
   { 
