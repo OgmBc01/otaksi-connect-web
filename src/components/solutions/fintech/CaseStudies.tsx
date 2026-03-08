@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '2M+ users, 45% digital adoption',
     metrics: ['Real-time payments', 'AI insights', '99.99% uptime'],
-    slug: 'emirates-nbd-digital-banking'
+    slug: 'digital-banking-gulf-financial'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: 'AAOIFI compliant, 500K+ users',
     metrics: ['Sharia certified', 'Profit calculation', 'Murabaha financing'],
-    slug: 'dubai-islamic-banking'
+    slug: 'digital-banking-gulf-financial'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '1M+ daily txns, 100+ currencies',
     metrics: ['PCI DSS Level 1', '3D Secure', 'Fraud detection'],
-    slug: 'network-international-payment'
+    slug: 'payment-gateway-gulf-pay'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '70% faster reviews, 98% accuracy',
     metrics: ['Real-time screening', 'Sanctions monitoring', 'Audit ready'],
-    slug: 'adcb-regtech'
+    slug: 'fraud-detection-securebank'
   }
 ]
 

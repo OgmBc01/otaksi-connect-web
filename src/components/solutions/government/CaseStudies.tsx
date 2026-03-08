@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '3M+ users, 50+ services',
     metrics: ['Unified portal', 'Mobile app', 'Real-time updates'],
-    slug: 'smart-dubai-platform'
+    slug: 'smart-city-platform'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '1.5M+ users, 80% satisfaction',
     metrics: ['Document center', 'Payment gateway', 'Status tracking'],
-    slug: 'ad-digital-portal'
+    slug: 'citizen-service-portal'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '25% less congestion, 1M+ vehicles',
     metrics: ['Real-time monitoring', 'Smart signals', 'Incident detection'],
-    slug: 'dubai-police-traffic'
+    slug: 'smart-city-platform'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '10K+ users, 50% faster processing',
     metrics: ['Workflow automation', 'Digital signatures', 'Audit trail'],
-    slug: 'moi-document-system'
+    slug: 'citizen-service-portal'
   }
 ]
 

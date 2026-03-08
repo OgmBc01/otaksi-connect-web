@@ -15,7 +15,7 @@ const caseStudies = [
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
     technologies: ['React Native', 'Node.js', 'AWS', 'Kubernetes'],
     results: '99.99% uptime, 2M+ active users',
-    slug: 'digital-banking-platform'
+    slug: 'digital-banking-gulf-financial'
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const caseStudies = [
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
     technologies: ['Next.js', 'GraphQL', 'AWS', 'Elasticsearch'],
     results: '200% increase in mobile conversion',
-    slug: 'ecommerce-marketplace'
+    slug: 'multi-vendor-marketplace'
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const caseStudies = [
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
     technologies: ['React', 'Python', 'FHIR', 'PostgreSQL'],
     results: '40% faster diagnosis, 500K+ records',
-    slug: 'healthcare-portal'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const caseStudies = [
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
     technologies: ['IoT', 'Python', 'TensorFlow', 'RabbitMQ'],
     results: '30% faster processing, 1M+ shipments',
-    slug: 'logistics-tracking-system'
+    slug: 'fleet-management-gulf-logistics'
   }
 ]
 

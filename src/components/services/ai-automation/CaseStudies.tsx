@@ -15,7 +15,7 @@ const caseStudies = [
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
     results: '500K+ images analyzed with 95% accuracy',
     metrics: ['40% faster diagnosis', '95% accuracy rate', '15+ hospitals integrated'],
-    slug: 'dha-ai-diagnosis'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const caseStudies = [
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
     results: '35% downtime reduction, 10K+ sensors monitored',
     metrics: ['35% less downtime', '40% cost savings', 'Real-time monitoring'],
-    slug: 'dp-world-predictive-maintenance'
+    slug: 'fleet-management-gulf-logistics'
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const caseStudies = [
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
     results: '45% increase in cross-sell, 5M+ users',
     metrics: ['45% revenue lift', '60% engagement boost', 'Real-time personalization'],
-    slug: 'majid-al-futtaim-recommendations'
+    slug: 'multi-vendor-marketplace'
   }
 ]
 

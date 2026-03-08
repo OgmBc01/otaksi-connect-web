@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '10x faster deployments, 99.99% uptime',
     metrics: ['50+ microservices', 'Daily deployments', 'Zero-downtime releases'],
-    slug: 'emirates-nbd-cicd'
+    slug: 'devops-transformation-gulf-tech'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '60% cost reduction, 99.99% availability',
     metrics: ['100+ apps migrated', 'Auto-scaling', 'Multi-region'],
-    slug: 'dp-world-kubernetes'
+    slug: 'devops-transformation-gulf-tech'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '5-minute incident detection, 99.9% uptime',
     metrics: ['1000+ metrics', 'Real-time alerts', 'Automated remediation'],
-    slug: 'dha-observability'
+    slug: 'devops-transformation-gulf-tech'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '100% infrastructure automation, 50% cost savings',
     metrics: ['200+ resources', 'GitOps workflow', 'Immutable infrastructure'],
-    slug: 'majid-al-futtaim-iac'
+    slug: 'devops-transformation-gulf-tech'
   }
 ]
 

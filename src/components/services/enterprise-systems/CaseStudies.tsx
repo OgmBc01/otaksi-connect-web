@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '40% operational efficiency, unified platform',
     metrics: ['50+ locations', '10K+ users', 'Real-time inventory'],
-    slug: 'majid-al-futtaim-erp'
+    slug: 'property-management-dubai-heights'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '45% sales growth, 360° customer view',
     metrics: ['2M+ customers', '30% faster response', 'AI-powered insights'],
-    slug: 'emirates-nbd-crm'
+    slug: 'digital-banking-gulf-financial'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '50% HR efficiency, 100% compliance',
     metrics: ['15K+ employees', 'Automated payroll', 'Self-service portal'],
-    slug: 'dha-hcm'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '30% cost reduction, 99% accuracy',
     metrics: ['1M+ shipments', 'Real-time tracking', 'Predictive analytics'],
-    slug: 'dp-world-scm'
+    slug: 'fleet-management-gulf-logistics'
   }
 ]
 

@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '30% fuel savings, 1,000+ vehicles',
     metrics: ['Real-time tracking', 'Route optimization', 'Driver behavior'],
-    slug: 'dp-world-fleet'
+    slug: 'fleet-management-gulf-logistics'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '40% throughput increase, 99.9% accuracy',
     metrics: ['Automated picking', 'Inventory accuracy', 'Space optimization'],
-    slug: 'aramex-warehouse'
+    slug: 'warehouse-automation-gulf-logistics'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '25% faster deliveries, 1M+ customers',
     metrics: ['Route optimization', 'Proof of delivery', 'Customer notifications'],
-    slug: 'fetchr-lastmile'
+    slug: 'fleet-management-gulf-logistics'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: 'End-to-end visibility, 50+ DCs',
     metrics: ['Real-time alerts', 'Predictive analytics', 'Supplier collaboration'],
-    slug: 'alfuttaim-controltower'
+    slug: 'fleet-management-gulf-logistics'
   }
 ]
 

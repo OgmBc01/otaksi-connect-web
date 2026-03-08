@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '85% omnichannel growth, unified customer view',
     metrics: ['50+ stores', '2M+ customers', '40% efficiency gain'],
-    slug: 'majid-al-futtaim-transformation'
+    slug: 'omnichannel-gulf-retail'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '70% faster processing, 99.9% accuracy',
     metrics: ['50+ processes', '1M+ transactions', 'Zero errors'],
-    slug: 'emirates-nbd-automation'
+    slug: 'fraud-detection-securebank'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '60% faster service, 2M+ patients served',
     metrics: ['15 hospitals', 'Digital records', 'Patient portal'],
-    slug: 'dha-digital-maturity'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '35% efficiency gain, real-time visibility',
     metrics: ['1M+ containers', 'Real-time tracking', 'Predictive analytics'],
-    slug: 'dp-world-digital-strategy'
+    slug: 'fleet-management-gulf-logistics'
   }
 ]
 

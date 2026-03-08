@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '35% energy savings, 50K+ residents',
     metrics: ['50+ buildings', 'IoT sensors', 'Tenant app'],
-    slug: 'emaar-smart-building'
+    slug: 'smart-building-dubai-heights'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '40% efficiency gain, 20K+ units',
     metrics: ['Tenant portal', 'Automated payments', 'Maintenance tracking'],
-    slug: 'dubai-properties-pms'
+    slug: 'property-management-dubai-heights'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '1M+ monthly users, 50K+ listings',
     metrics: ['AI search', 'Virtual tours', 'Agent portal'],
-    slug: 'property-finder-marketplace'
+    slug: 'multi-vendor-marketplace'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '90% faster registration, 30K+ contracts',
     metrics: ['Ejari API', 'Document management', 'Compliance'],
-    slug: 'wasl-ejari-integration'
+    slug: 'property-management-dubai-heights'
   }
 ]
 

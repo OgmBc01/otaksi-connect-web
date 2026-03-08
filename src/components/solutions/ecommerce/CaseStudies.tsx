@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '1M+ customers, 5K+ sellers',
     metrics: ['Multi-vendor', 'Commission tracking', 'Seller dashboard'],
-    slug: 'noon-marketplace'
+    slug: 'multi-vendor-marketplace'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '200% online growth, 100+ stores',
     metrics: ['Click & collect', 'Real-time inventory', 'Unified commerce'],
-    slug: 'majid-al-futtaim-omnichannel'
+    slug: 'omnichannel-gulf-retail'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '65% mobile revenue, 4.8★ rating',
     metrics: ['Push notifications', 'Mobile payments', 'Personalization'],
-    slug: 'namshi-mobile-app'
+    slug: 'multi-vendor-marketplace'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '500+ B2B customers, 40% reorder rate',
     metrics: ['Bulk pricing', 'Account management', 'Reorder portal'],
-    slug: 'alfuttaim-b2b'
+    slug: 'omnichannel-gulf-retail'
   }
 ]
 

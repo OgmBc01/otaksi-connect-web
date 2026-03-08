@@ -16,7 +16,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '2M+ patients, 15 hospitals',
     metrics: ['Unified records', 'Real-time data', 'DHA compliant'],
-    slug: 'dha-ehr-implementation'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '100K+ consultations, 95% satisfaction',
     metrics: ['Video visits', 'E-prescriptions', 'Patient portal'],
-    slug: 'mediclinic-telemedicine'
+    slug: 'telemedicine-gulf-health'
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '500K+ users, 40% engagement',
     metrics: ['Appointments', 'Records access', 'Secure messaging'],
-    slug: 'nmc-patient-portal'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '1M+ tests/month, 50% faster',
     metrics: ['Auto-verification', 'Quality control', 'HL7 integration'],
-    slug: 'aster-lis'
+    slug: 'ehr-gulf-health'
   }
 ]
 

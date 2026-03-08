@@ -15,7 +15,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '40% cost reduction, 99.99% uptime',
     metrics: ['50+ apps migrated', 'Zero downtime', 'PCI DSS compliant'],
-    slug: 'emirates-nbd-aws-migration'
+    slug: 'cloud-migration-gulf-financial'
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: 'Real-time tracking, 30% efficiency gain',
     metrics: ['10K+ containers tracked', 'Global deployment', '99.9% availability'],
-    slug: 'dp-world-hybrid-cloud'
+    slug: 'cloud-migration-gulf-financial'
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '60% faster deployments, auto-scaling',
     metrics: ['15+ microservices', '2M+ patient records', 'HIPAA compliant'],
-    slug: 'dha-kubernetes-modernization'
+    slug: 'cloud-migration-gulf-financial'
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const caseStudies = [
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '5M+ users served, 200% peak handling',
     metrics: ['Multi-cloud active-active', 'Black Friday ready', '99.99% uptime'],
-    slug: 'majid-al-futtaim-multi-cloud'
+    slug: 'cloud-migration-gulf-financial'
   }
 ]
 
