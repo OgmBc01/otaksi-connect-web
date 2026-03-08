@@ -3,45 +3,159 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
-import CaseStudyLayout from '@/components/case-studies/CaseStudyLayout'
+import { useEffect, useRef, useState } from 'react'
 import Button from '@/components/ui/Button'
 
-export default function propertymanagementdubaiheightsPage() {
-  // Unique canvas animation for this case study
+export default function PropertyManagementDubaiHeightsPage() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [activeProcess, setActiveProcess] = useState(0)
+
+  // PropTech-themed animation - buildings, floor plans, property markers
   useEffect(() => {
-    const canvas = document.getElementById('case-study-canvas') as HTMLCanvasElement
+    const canvas = canvasRef.current
     if (!canvas) return
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
     const setCanvasSize = () => {
-      const section = canvas.parentElement?.parentElement
-      if (section) {
-        const rect = section.getBoundingClientRect()
-        canvas.width = rect.width
-        canvas.height = rect.height
-      }
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
     }
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
-    // TODO: Implement unique animation for Real Estate case study
+    // Building silhouettes
+    const buildings: { x: number; height: number; width: number; pulse: number; opacity: number }[] = []
+    for (let i = 0; i < 12; i++) {
+      buildings.push({
+        x: 100 + i * 150,
+        height: 100 + Math.random() * 150,
+        width: 40 + Math.random() * 30,
+        pulse: Math.random() * Math.PI * 2,
+        opacity: 0.12 + Math.random() * 0.15,
+      })
+    }
+
+    // Floor plan grid lines
+    const gridLines: { x1: number; y1: number; x2: number; y2: number; opacity: number }[] = []
+    for (let i = 0; i < 15; i++) {
+      gridLines.push({
+        x1: Math.random() * canvas.width,
+        y1: Math.random() * canvas.height,
+        x2: Math.random() * canvas.width,
+        y2: Math.random() * canvas.height,
+        opacity: 0.08 + Math.random() * 0.1,
+      })
+    }
+
+    // Property markers (like map pins)
+    const markers: { x: number; y: number; pulse: number; opacity: number }[] = []
+    for (let i = 0; i < 10; i++) {
+      markers.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        pulse: Math.random() * Math.PI * 2,
+        opacity: 0.18 + Math.random() * 0.2,
+      })
+    }
+
+    // Floating price tags
+    const prices: { x: number; y: number; text: string; size: number; opacity: number }[] = []
+    const priceValues = ['AED 1.2M', 'AED 2.5M', 'AED 850K', 'AED 3.1M', 'AED 1.8M', 'AED 4.2M']
+    for (let i = 0; i < 8; i++) {
+      prices.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        text: priceValues[Math.floor(Math.random() * priceValues.length)],
+        size: 14 + Math.random() * 8,
+        opacity: 0.12 + Math.random() * 0.15,
+      })
+    }
+
     let time = 0
     let animationFrame: number
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      time += 0.01
+      time += 0.005
 
-      // Placeholder animation
-      for (let i = 0; i < 5; i++) {
+      // Draw city grid
+      ctx.strokeStyle = 'rgba(91, 108, 255, 0.06)'
+      ctx.lineWidth = 0.5
+
+      for (let i = 0; i < canvas.width; i += 80) {
         ctx.beginPath()
-        ctx.arc(200 + i * 150, 300, 40, 0, Math.PI * 2)
-        ctx.fillStyle = i % 2 === 0 ? 'rgba(255, 46, 159, 0.1)' : 'rgba(91, 108, 255, 0.1)'
-        ctx.fill()
+        ctx.moveTo(i, 0)
+        ctx.lineTo(i, canvas.height)
+        ctx.stroke()
       }
+
+      for (let i = 0; i < canvas.height; i += 80) {
+        ctx.beginPath()
+        ctx.moveTo(0, i)
+        ctx.lineTo(canvas.width, i)
+        ctx.stroke()
+      }
+
+      // Draw buildings
+      buildings.forEach((building) => {
+        building.pulse += 0.01
+        const pulseHeight = building.height + Math.sin(building.pulse) * 10
+
+        // Building outline
+        ctx.strokeStyle = `rgba(91, 108, 255, ${building.opacity})`
+        ctx.lineWidth = 1.5
+        ctx.strokeRect(building.x, 400 - pulseHeight, building.width, pulseHeight)
+
+        // Windows
+        ctx.fillStyle = `rgba(255, 46, 159, ${building.opacity * 0.7})`
+        for (let w = 0; w < 5; w++) {
+          if (pulseHeight > w * 30) {
+            ctx.fillRect(building.x + 8, 400 - pulseHeight + w * 30 + 10, 8, 12)
+            ctx.fillRect(building.x + 24, 400 - pulseHeight + w * 30 + 10, 8, 12)
+          }
+        }
+      })
+
+      // Draw floor plan grid lines
+      gridLines.forEach((line) => {
+        ctx.beginPath()
+        ctx.moveTo(line.x1, line.y1)
+        ctx.lineTo(line.x2, line.y2)
+        ctx.strokeStyle = `rgba(255, 46, 159, ${line.opacity})`
+        ctx.lineWidth = 0.8
+        ctx.stroke()
+      })
+
+      // Draw property markers
+      markers.forEach((marker) => {
+        marker.pulse += 0.03
+        const yOffset = Math.sin(marker.pulse) * 10
+
+        ctx.beginPath()
+        ctx.moveTo(marker.x, marker.y - 15 + yOffset)
+        ctx.lineTo(marker.x - 8, marker.y + yOffset)
+        ctx.lineTo(marker.x + 8, marker.y + yOffset)
+        ctx.closePath()
+        ctx.fillStyle = `rgba(91, 108, 255, ${marker.opacity})`
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.arc(marker.x, marker.y - 15 + yOffset, 4, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255, 46, 159, ${marker.opacity})`
+        ctx.fill()
+      })
+
+      // Draw floating price tags
+      prices.forEach((price) => {
+        price.y += 0.1
+        if (price.y > canvas.height) price.y = 0
+
+        ctx.font = `${price.size}px monospace`
+        ctx.fillStyle = `rgba(91, 108, 255, ${price.opacity})`
+        ctx.fillText(price.text, price.x, price.y)
+      })
 
       animationFrame = requestAnimationFrame(animate)
     }
@@ -54,202 +168,577 @@ export default function propertymanagementdubaiheightsPage() {
     }
   }, [])
 
+  const metrics = [
+    { value: '20K+', label: 'Residential Units' },
+    { value: '50+', label: 'Buildings Managed' },
+    { value: '40%', label: 'Efficiency Gain' },
+    { value: '90%', label: 'Faster Ejari Registration' },
+  ]
+
+  const processSteps = [
+    {
+      phase: 'Discovery',
+      title: 'Portfolio Analysis',
+      description: 'Analyzed 50+ buildings and 20K+ units across Dubai',
+      icon: '🔍',
+      gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+    },
+    {
+      phase: 'Integration',
+      title: 'Ejari Integration',
+      description: 'Direct integration with Dubai Land Department APIs',
+      icon: '📝',
+      gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    },
+    {
+      phase: 'Development',
+      title: 'Platform Build',
+      description: 'Built tenant portal with automated payments',
+      icon: '⚙️',
+      gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+    },
+    {
+      phase: 'Migration',
+      title: 'Data Migration',
+      description: 'Migrated 20K+ tenant records with zero errors',
+      icon: '🚀',
+      gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    },
+  ]
+
+  const technologies = [
+    { name: 'React', level: 95, description: 'Tenant portal' },
+    { name: 'Node.js', level: 92, description: 'Backend API' },
+    { name: 'PostgreSQL', level: 90, description: 'Property database' },
+    { name: 'Redis', level: 85, description: 'Session caching' },
+    { name: 'Ejari API', level: 95, description: 'Rent registration' },
+    { name: 'AWS', level: 90, description: 'Cloud hosting' },
+    { name: 'Docker', level: 88, description: 'Containerization' },
+    { name: 'Elasticsearch', level: 85, description: 'Property search' },
+  ]
+
   return (
-    <CaseStudyLayout
-      title="Property Management System"
-      client="Dubai Heights Real Estate"
-      industry="Real Estate"
-      gradient="linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)"
-      icon="🏢"
-      technologies={['React', 'Node.js', 'PostgreSQL', 'Redis', 'AWS']}
-      metrics={['20K+ units', 'Tenant portal', 'Automated payments', 'Maintenance tracking']}
-      results="40% efficiency gain, 90% faster Ejari registration"
-    >
-      {/* Challenge Section */}
-      <section className="relative py-16 bg-midnight overflow-hidden">
-        <canvas
-          id="case-study-canvas"
-          className="absolute inset-0 w-full h-full pointer-events-none opacity-20"
-        />
+    <main className="bg-midnight">
+      {/* Floating Background Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-60"
+      />
+
+      {/* Hero Section - Clean Header */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-32">
+        {/* Gradient Orbs */}
+        <div className="absolute top-40 left-20 w-96 h-96 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" />
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow animation-delay-2000" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Breadcrumb */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-6"
+          >
+            <nav className="flex justify-center items-center gap-2 text-sm text-gray-500">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span>•</span>
+              <Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link>
+              <span>•</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Property Management</span>
+            </nav>
+          </motion.div>
+
+          {/* Icon */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-8"
+          >
+            <div className="relative w-24 h-24 mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl blur-xl opacity-50" />
+              <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
+                <span className="text-5xl">🏢</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Title */}
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+            style={{ fontFamily: 'var(--font-clash)' }}
+          >
+            <span className="text-white">Property Management</span>{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">System</span>
+          </motion.h1>
+
+          {/* Client & Industry */}
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-xl text-gray-400 mb-8"
+          >
+            Dubai Heights Real Estate • PropTech
+          </motion.p>
+
+          {/* Quick Stats - Transparent pills */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap justify-center gap-6"
+          >
+            <div className="backdrop-blur-sm bg-white/5 rounded-full border border-white/10 px-6 py-3 hover:bg-white/10 transition-all">
+              <span className="text-sm font-medium gradient-text">20K+ Units</span>
+            </div>
+            <div className="backdrop-blur-sm bg-white/5 rounded-full border border-white/10 px-6 py-3 hover:bg-white/10 transition-all">
+              <span className="text-sm font-medium gradient-text">50+ Buildings</span>
+            </div>
+            <div className="backdrop-blur-sm bg-white/5 rounded-full border border-white/10 px-6 py-3 hover:bg-white/10 transition-all">
+              <span className="text-sm font-medium gradient-text">Ejari Integrated</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Challenge Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight">
+        <div className="absolute inset-0 bg-gradient-glow" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
-                The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Challenge</span>
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                Dubai Heights Real Estate, a leading Real Estate organization in the UAE, faced significant 
-                challenges with their legacy systems and manual processes. Operations were 
-                inefficient, data was siloed, and they needed to scale to meet growing demand.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mt-2" />
-                  <p className="text-gray-400">Manual processes causing delays and errors</p>
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
+                  The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Challenge</span>
+                </h2>
+                <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                  Dubai Heights Real Estate managed 50+ luxury residential towers using spreadsheets and manual processes.
+                  Tenant communications were fragmented, maintenance requests got lost, and Ejari registration took days.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    'Manual rent collection with 15% late payments',
+                    'Ejari registration taking 3-5 days per tenant',
+                    'Maintenance requests tracked via email and phone',
+                    'No visibility into portfolio performance',
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mt-2 group-hover:scale-150 transition-transform" />
+                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{item}</p>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mt-2" />
-                  <p className="text-gray-400">Legacy systems unable to scale with business growth</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="absolute -inset-4 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-3xl opacity-30 blur-2xl" />
+                <div className="relative backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                  <Image
+                    src="/images/case-studies/property-management-dubai-heights/challenge.jpg"
+                    alt="Property management challenge"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <div className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] mt-2" />
-                  <p className="text-gray-400">Limited visibility into operations and performance</p>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative h-96 rounded-2xl overflow-hidden"
-            >
-              <Image
-                src="/images/case-studies/property-management-dubai-heights/challenge.jpg"
-                alt="Challenge illustration"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Solution Section */}
-      <section className="relative py-16 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* Solution Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative h-96 rounded-2xl overflow-hidden md:order-2"
-            >
-              <Image
-                src="/images/case-studies/property-management-dubai-heights/solution.jpg"
-                alt="Solution illustration"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="md:order-1"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
-                Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Solution</span>
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                We developed a comprehensive Real Estate solution that transformed their operations:
-              </p>
-              <div className="space-y-4">
-                <div className="glass-card p-6 rounded-xl">
-                  <h3 className="text-xl font-bold mb-2 gradient-text">Modern Architecture</h3>
-                  <p className="text-gray-400">Built with scalable microservices and cloud-native technologies</p>
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="lg:order-2"
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
+                  Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Solution</span>
+                </h2>
+                <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                  We built a comprehensive property management platform with tenant portal, automated payments,
+                  and direct integration with Dubai's Ejari system for instant tenancy contract registration.
+                </p>
+
+                <div className="space-y-4">
+                  {[
+                    'Tenant portal for rent payments, maintenance requests, and document access',
+                    'Automated Ejari registration with Dubai Land Department',
+                    'Real-time portfolio analytics and performance dashboards',
+                    'Mobile app for tenants and property managers',
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] mt-2 group-hover:scale-150 transition-transform" />
+                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors">{item}</p>
+                    </div>
+                  ))}
                 </div>
-                <div className="glass-card p-6 rounded-xl">
-                  <h3 className="text-xl font-bold mb-2 gradient-text">Automated Workflows</h3>
-                  <p className="text-gray-400">Eliminated manual processes with intelligent automation</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:order-1 relative"
+              >
+                <div className="absolute -inset-4 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-3xl opacity-30 blur-2xl" />
+                <div className="relative backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+                  <Image
+                    src="/images/case-studies/property-management-dubai-heights/solution.jpg"
+                    alt="Property management solution"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
                 </div>
-                <div className="glass-card p-6 rounded-xl">
-                  <h3 className="text-xl font-bold mb-2 gradient-text">Real-time Analytics</h3>
-                  <p className="text-gray-400">Comprehensive dashboards and reporting capabilities</p>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Technologies Section */}
-      <section className="relative py-16 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* Process Timeline - Individual Blurred Glass Cards */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header - Clean */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'var(--font-clash)' }}>
-              Technologies <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Used</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+              Implementation <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Journey</span>
             </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              How we transformed property management across 50+ buildings in 6 months
+            </p>
           </motion.div>
-          <div className="flex flex-wrap justify-center gap-4">
-                          <span className='px-4 py-2 glass-card rounded-full text-sm text-gray-300 border border-white/10'>React</span>
-              <span className='px-4 py-2 glass-card rounded-full text-sm text-gray-300 border border-white/10'>Node.js</span>
-              <span className='px-4 py-2 glass-card rounded-full text-sm text-gray-300 border border-white/10'>PostgreSQL</span>
-              <span className='px-4 py-2 glass-card rounded-full text-sm text-gray-300 border border-white/10'>Redis</span>
-              <span className='px-4 py-2 glass-card rounded-full text-sm text-gray-300 border border-white/10'>AWS</span>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative"
+                onMouseEnter={() => setActiveProcess(index)}
+              >
+                <div className="relative h-full">
+                  {/* Glow Effect */}
+                  <div 
+                    className={`absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 ${
+                      activeProcess === index ? 'opacity-30' : ''
+                    }`}
+                    style={{ background: `linear-gradient(135deg, ${step.gradient.includes('FF2E9F') ? '#FF2E9F' : '#5B6CFF'}, ${step.gradient.includes('5B6CFF') ? '#5B6CFF' : '#FF2E9F'})` }}
+                  />
+                  
+                  {/* Glass Card - Blurred */}
+                  <div className="relative h-full backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-6 transition-all duration-300">
+                    <div className="text-3xl mb-4">{step.icon}</div>
+                    <div className={`text-sm font-medium mb-2 text-transparent bg-clip-text bg-gradient-to-r ${step.gradient}`}>
+                      {step.phase}
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 group-hover:gradient-text transition-all duration-300">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                      {step.description}
+                    </p>
+                    <div className="absolute top-4 right-4 text-4xl font-bold text-white/5">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="relative py-16 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* Architecture Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+                Property Management <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Architecture</span>
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-4 gap-6 text-center">
+              {[
+                { icon: '👥', title: 'Tenant Portal', tech: 'React, Mobile App' },
+                { icon: '💰', title: 'Payment Engine', tech: 'Stripe, Direct Debit' },
+                { icon: '📝', title: 'Ejari Integration', tech: 'DLD API' },
+                { icon: '📊', title: 'Analytics', tech: 'Elasticsearch, Kibana' },
+              ].map((item, index) => (
+                <div key={index} className="backdrop-blur-lg bg-white/5 rounded-xl border border-white/10 p-6 hover:border-white/20 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] bg-opacity-10 flex items-center justify-center mx-auto mb-3">
+                    <span className="text-xl">{item.icon}</span>
+                  </div>
+                  <p className="text-sm font-medium">{item.title}</p>
+                  <p className="text-xs text-gray-500">{item.tech}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+                Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Stack</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                The technologies powering Dubai Heights' property management platform
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {technologies.map((tech, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="group relative"
+                >
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500" />
+                  <div className="relative backdrop-blur-lg bg-white/5 rounded-xl border border-white/10 group-hover:border-white/20 p-4 transition-all">
+                    <div className="flex justify-between items-center mb-2">
+                      <div>
+                        <span className="text-sm font-medium text-white">{tech.name}</span>
+                        <p className="text-xs text-gray-500">{tech.description}</p>
+                      </div>
+                      <span className="text-sm font-bold gradient-text">{tech.level}%</span>
+                    </div>
+                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${tech.level}%` }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="h-full rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+                Business <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Impact</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Measurable results that transformed property operations
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {metrics.map((metric, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group relative"
+                >
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500" />
+                  <div className="relative backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-6 text-center transition-all">
+                    <div className="text-3xl font-bold gradient-text mb-2">{metric.value}</div>
+                    <div className="text-sm text-gray-500">{metric.label}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mt-12 text-center"
+            >
+              <div className="inline-block backdrop-blur-lg bg-white/5 px-8 py-4 rounded-full border border-white/10">
+                <p className="text-lg font-medium">
+                  <span className="gradient-text">90% faster Ejari registration</span>
+                  <span className="text-gray-400 mx-2">•</span>
+                  <span className="gradient-text">40% operational efficiency</span>
+                  <span className="text-gray-400 mx-2">•</span>
+                  <span className="gradient-text">95% tenant satisfaction</span>
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="group relative"
           >
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'var(--font-clash)' }}>
-              Business <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Impact</span>
-            </h2>
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-3xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500" />
+            <div className="relative backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 group-hover:border-white/20 p-12 text-center transition-all">
+              <div className="text-6xl mb-6 text-gray-600">"</div>
+              <p className="text-xl text-gray-300 italic mb-8 leading-relaxed">
+                "This platform has completely transformed how we manage our properties. What used to take days 
+                now happens in minutes. Our tenants love the portal for payments and maintenance requests, and 
+                the Ejari integration alone has saved us countless hours. We're now able to scale our portfolio 
+                without adding administrative overhead."
+              </p>
+              <div>
+                <p className="font-bold text-white text-lg">Sultan Al Maktoum</p>
+                <p className="text-sm text-gray-500">Chief Operating Officer, Dubai Heights Real Estate</p>
+              </div>
+            </div>
           </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div className="glass-card p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">20K+ units</div>
-              <div className="text-sm text-gray-500">Improvement</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">Tenant portal</div>
-              <div className="text-sm text-gray-500">Improvement</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">Automated payments</div>
-              <div className="text-sm text-gray-500">Improvement</div>
-            </div>
-            <div className="glass-card p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">Maintenance tracking</div>
-              <div className="text-sm text-gray-500">Improvement</div>
-            </div>
-          </div>
-          <div className="mt-12 text-center">
-            <div className="inline-block glass-card px-8 py-4 rounded-full">
-              <p className="text-xl font-bold gradient-text">40% efficiency gain, 90% faster Ejari registration</p>
+        </div>
+      </section>
+
+      {/* Related Case Studies - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 shadow-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+                Related <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Case Studies</span>
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { title: 'Smart Building IoT Platform', client: 'Dubai Heights Real Estate', slug: 'smart-building-dubai-heights' },
+                { title: 'Digital Banking Platform', client: 'Gulf Financial', slug: 'digital-banking-gulf-financial' },
+              ].map((related, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Link href={`/case-studies/${related.slug}`} className="group block relative">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500" />
+                    <div className="relative backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-6 transition-all">
+                      <h3 className="text-lg font-bold mb-1 group-hover:gradient-text transition-all duration-300">{related.title}</h3>
+                      <p className="text-sm text-gray-500">{related.client}</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-16 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* CTA Section - Blurred Glass Card */}
+      <section className="relative py-24 bg-midnight border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-glow" />
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl opacity-20 animate-pulse-slow" />
+        </div>
+
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="glass-card p-12 rounded-3xl"
+            className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 md:p-16 shadow-2xl"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
-              Ready to Achieve Similar <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Results</span>?
+            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
+              Ready to Transform Your{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Property Management</span>?
             </h2>
-            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help transform your business with technology.
+            <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+              Let's discuss how our PropTech solutions can streamline your operations and enhance tenant experiences.
             </p>
             <Link href="/contact">
               <Button variant="primary" size="large">
@@ -259,6 +748,6 @@ export default function propertymanagementdubaiheightsPage() {
           </motion.div>
         </div>
       </section>
-    </CaseStudyLayout>
+    </main>
   )
 }
