@@ -1,0 +1,256 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+
+const teamMembers = [
+  {
+    name: 'Engr. Dr. Farouq Sadik Bashir',
+    title: 'CEO & Chairman',
+    qualifications: 'PhD. Computer Science',
+    expertise: 'AI, Machine Learning, Deep Learning, Big Data',
+    description: 'Expert in leveraging data-driven strategies to create value for clients through advanced AI technologies.',
+    image: '/images/team/farouq.jpg',
+    social: {
+      facebook: 'https://web.facebook.com/profile.php?id=100006751037416',
+      instagram: 'https://www.instagram.com/farouq_sadik/',
+      linkedin: 'https://www.linkedin.com/in/farouq-sadik-bashir-191521191',
+      twitter: 'https://twitter.com/The_Cryptic_?t=4Yo39Y5XCgZMYFQrwvEqcg&s=09',
+    },
+    gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+  },
+  {
+    name: 'Engr. Abdullah Bala Madaki',
+    title: 'Co-Founder & CTO',
+    qualifications: 'MSc. Computer Science',
+    expertise: 'UX/UI Design, Full Stack Development, AI Integration',
+    description: 'User-centric Senior UX/UI Designer with multinational experience. Leverages latest design trends to develop user-friendly platforms.',
+    image: '/images/team/abdullah.jpg',
+    website: 'https://madaki.dev/',
+    social: {
+      facebook: 'https://web.facebook.com/profile.php?id=100006751037416',
+      instagram: 'https://www.instagram.com/a_b_madaki/',
+      linkedin: 'https://www.linkedin.com/in/abdullah-bala-madaki-ab8804129/',
+      twitter: 'https://twitter.com/Abdaullahbalam',
+    },
+    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+  },
+]
+
+export default function Team() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  // Team section animation - connecting minds
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const setCanvasSize = () => {
+      const section = canvas.parentElement?.parentElement
+      if (section) {
+        const rect = section.getBoundingClientRect()
+        canvas.width = rect.width
+        canvas.height = rect.height
+      }
+    }
+    setCanvasSize()
+    window.addEventListener('resize', setCanvasSize)
+
+    // Two main nodes representing the founders
+    const nodes = [
+      { x: canvas.width * 0.3, y: canvas.height * 0.5, pulse: 0 },
+      { x: canvas.width * 0.7, y: canvas.height * 0.5, pulse: 0 },
+    ]
+
+    // Connection between them
+    let time = 0
+    let animationFrame: number
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      time += 0.01
+
+      // Draw connection
+      ctx.beginPath()
+      ctx.moveTo(nodes[0].x, nodes[0].y)
+      ctx.lineTo(nodes[1].x, nodes[1].y)
+      ctx.strokeStyle = 'rgba(91, 108, 255, 0.2)'
+      ctx.lineWidth = 2
+      ctx.stroke()
+
+      // Draw flowing data between them
+      const flowPos = time % 1
+      const flowX = nodes[0].x + (nodes[1].x - nodes[0].x) * flowPos
+      const flowY = nodes[0].y + (nodes[1].y - nodes[0].y) * flowPos
+
+      ctx.beginPath()
+      ctx.arc(flowX, flowY, 6, 0, Math.PI * 2)
+      const gradient = ctx.createRadialGradient(flowX, flowY, 0, flowX, flowY, 12)
+      gradient.addColorStop(0, 'rgba(255, 46, 159, 0.4)')
+      gradient.addColorStop(1, 'transparent')
+      ctx.fillStyle = gradient
+      ctx.fill()
+
+      animationFrame = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      window.removeEventListener('resize', setCanvasSize)
+      if (animationFrame) cancelAnimationFrame(animationFrame)
+    }
+  }, [])
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring" as const,
+        damping: 25,
+        stiffness: 100,
+      },
+    },
+  }
+
+  return (
+    <section className="relative py-24 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* Animated Background Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30"
+      />
+      
+      <div className="absolute inset-0 bg-gradient-glow" />
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
+            Meet the{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Neural Network</span>
+          </h2>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            The brains behind Otaksi Connect - combining AI expertise with design excellence
+          </p>
+        </motion.div>
+
+        {/* Team Grid */}
+        <motion.div
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group relative"
+            >
+              <div className="relative h-full">
+                {/* Glow Effect */}
+                <div 
+                  className={`absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 bg-gradient-to-r ${member.gradient}`}
+                />
+                
+                {/* Card */}
+                <div className="relative h-full backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-8 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row gap-8 items-start">
+                    {/* Image Placeholder */}
+                    <div className="relative w-32 h-32 flex-shrink-0">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] p-[2px]">
+                        <div className="w-full h-full rounded-full bg-midnight flex items-center justify-center">
+                          <span className="text-4xl">{index === 0 ? '🧠' : '💻'}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-1 group-hover:gradient-text transition-all duration-300">
+                        {member.name}
+                      </h3>
+                      <p className="text-lg gradient-text mb-2">{member.title}</p>
+                      <p className="text-sm text-gray-500 mb-3">{member.qualifications}</p>
+                      <p className="text-sm text-gray-400 mb-4">{member.description}</p>
+                      
+                      {/* Expertise Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {member.expertise.split(', ').map((item, i) => (
+                          <span key={i} className="text-xs px-2 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Social Links */}
+                      <div className="flex gap-3">
+                        {member.social.facebook && (
+                          <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#FF2E9F] hover:to-[#5B6CFF] transition-all duration-300">
+                            <span className="text-sm">📘</span>
+                          </a>
+                        )}
+                        {member.social.instagram && (
+                          <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#FF2E9F] hover:to-[#5B6CFF] transition-all duration-300">
+                            <span className="text-sm">📷</span>
+                          </a>
+                        )}
+                        {member.social.linkedin && (
+                          <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#FF2E9F] hover:to-[#5B6CFF] transition-all duration-300">
+                            <span className="text-sm">💼</span>
+                          </a>
+                        )}
+                        {member.social.twitter && (
+                          <a href={member.social.twitter} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#FF2E9F] hover:to-[#5B6CFF] transition-all duration-300">
+                            <span className="text-sm">🐦</span>
+                          </a>
+                        )}
+                        {member.website && (
+                          <a href={member.website} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-r hover:from-[#FF2E9F] hover:to-[#5B6CFF] transition-all duration-300">
+                            <span className="text-sm">🌐</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}

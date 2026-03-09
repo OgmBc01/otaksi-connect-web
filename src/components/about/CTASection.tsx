@@ -1,0 +1,104 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import Button from '@/components/ui/Button'
+import { useEffect, useRef } from 'react'
+
+export default function CTASection() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  // CTA animation - neural invitation
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const setCanvasSize = () => {
+      const section = canvas.parentElement?.parentElement
+      if (section) {
+        const rect = section.getBoundingClientRect()
+        canvas.width = rect.width
+        canvas.height = rect.height
+      }
+    }
+    setCanvasSize()
+    window.addEventListener('resize', setCanvasSize)
+
+    // Expanding neural rings
+    let time = 0
+    let animationFrame: number
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      time += 0.01
+
+      // Draw expanding rings
+      for (let i = 0; i < 3; i++) {
+        const radius = 50 + (time * 50 + i * 100) % 300
+        ctx.beginPath()
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2)
+        ctx.strokeStyle = `rgba(91, 108, 255, ${0.2 - radius / 1000})`
+        ctx.lineWidth = 2
+        ctx.stroke()
+      }
+
+      animationFrame = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame)
+    }
+  }, [])
+
+  return (
+    <section className="relative py-24 bg-midnight border-t border-white/5 overflow-hidden">
+      {/* Animated Background Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30"
+      />
+      
+      <div className="absolute inset-0 bg-gradient-glow" />
+      
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl opacity-20 animate-pulse-slow" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-12 md:p-16 shadow-2xl"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-clash)' }}>
+            Ready to Join the{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Neural Network</span>?
+          </h2>
+          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+            Let's connect and explore how we can help you observe complex systems and engineer intelligent solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact">
+              <Button variant="primary" size="large">
+                Start the Connection
+              </Button>
+            </Link>
+            <Link href="/case-studies">
+              <Button variant="secondary" size="large">
+                See Our Neural Network in Action
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

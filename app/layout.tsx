@@ -30,14 +30,11 @@ export default function RootLayout({
         padding: 0,
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}>
-        <NeuralNetworkProvider>
           {/* Global neural network canvas effect */}
-          <NeuralNetworkCanvas />
           <Navbar />
           <div id="hero-section">
             {children}
           </div>
-        </NeuralNetworkProvider>
       </body>
     </html>
   )
