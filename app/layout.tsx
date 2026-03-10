@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import NavbarWrapper from '@/components/layout/NavbarWrapper'
+import BodyBackground from '@/components/layout/BodyBackground'
 import { NeuralNetworkProvider } from '@/context/NeuralNetworkContext'
 import NeuralNetworkCanvas from '@/components/animations/NeuralNetworkCanvas'
 
@@ -24,19 +25,13 @@ export default function RootLayout({
   // Only show Navbar if not on /dashboard or subpages
   return (
     <html lang="en">
-      <body style={{ 
-        backgroundColor: '#0B0616', 
-        color: '#FFFFFF',
-        margin: 0,
-        padding: 0,
-        fontFamily: 'system-ui, -apple-system, sans-serif'
-      }}>
-          {/* Global neural network canvas effect */}
-          <NavbarWrapper />
-          <div id="hero-section">
-            {children}
-          </div>
-      </body>
+      <BodyBackground>
+        {/* Global neural network canvas effect */}
+        <NavbarWrapper />
+        <div id="hero-section">
+          {children}
+        </div>
+      </BodyBackground>
     </html>
   )
 }
