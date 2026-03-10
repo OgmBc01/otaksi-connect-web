@@ -1,8 +1,8 @@
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-
-import Navbar from '@/components/layout/Navbar'
+import NavbarWrapper from '@/components/layout/NavbarWrapper'
 import { NeuralNetworkProvider } from '@/context/NeuralNetworkContext'
 import NeuralNetworkCanvas from '@/components/animations/NeuralNetworkCanvas'
 
@@ -21,6 +21,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Only show Navbar if not on /dashboard or subpages
   return (
     <html lang="en">
       <body style={{ 
@@ -31,6 +32,7 @@ export default function RootLayout({
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}>
           {/* Global neural network canvas effect */}
+          <NavbarWrapper />
           <div id="hero-section">
             {children}
           </div>

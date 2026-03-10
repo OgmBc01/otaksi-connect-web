@@ -12,19 +12,19 @@ const companyLinks = [
 ]
 
 const servicesLinks = [
-  { name: 'Software Engineering', href: '/solutions/software-engineering' },
-  { name: 'AI & Automation', href: '/solutions/ai-automation' },
-  { name: 'Cloud Platforms', href: '/solutions/cloud-platforms' },
-  { name: 'Enterprise Systems', href: '/solutions/enterprise-systems' },
+  { name: 'Software Engineering', href: '/services/software-engineering' },
+  { name: 'AI & Automation', href: '/services/ai-automation' },
+  { name: 'Cloud Platforms', href: '/services/cloud-platforms' },
+  { name: 'Enterprise Systems', href: '/services/enterprise-systems' },
 ]
 
 const industriesLinks = [
-  { name: 'Real Estate', href: '/industries/real-estate' },
-  { name: 'FinTech', href: '/industries/fintech' },
-  { name: 'Healthcare', href: '/industries/healthcare' },
-  { name: 'Logistics', href: '/industries/logistics' },
-  { name: 'Government', href: '/industries/government' },
-  { name: 'Retail', href: '/industries/retail' },
+  { name: 'Real Estate', href: '/solutions/real-estate' },
+  { name: 'FinTech', href: '/solutions/fintech' },
+  { name: 'Healthcare', href: '/solutions/healthcare' },
+  { name: 'Logistics', href: '/solutions/logistics' },
+  { name: 'Government', href: '/solutions/government' },
+  { name: 'Retail', href: '/solutions/ecommerce' },
 ]
 
 const resourcesLinks = [
