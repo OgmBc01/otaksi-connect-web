@@ -264,25 +264,34 @@ export default function Footer() {
               © {currentYear} Otaksi Connect. All rights reserved.
             </p>
 
-            {/* Legal Links */}
-            <div className="flex gap-6">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
-                >
-                  {item}
-                </Link>
-              ))}
-            </div>
+{/* Legal Links - Replace the existing legal links section */}
+<div className="flex gap-6">
+  <Link
+    href="/legal/privacy"
+    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+  >
+    Privacy Policy
+  </Link>
+  <Link
+    href="/legal/terms"
+    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+  >
+    Terms of Service
+  </Link>
+  <Link
+    href="/legal/cookies"
+    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+  >
+    Cookie Policy
+  </Link>
+</div>
 
             {/* UAE Flag Indicator */}
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <span className="text-sm text-gray-500">Serving</span>
               <span className="text-lg">🇦🇪</span>
               <span className="text-sm text-gray-400">UAE</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Data Stream Animation */}

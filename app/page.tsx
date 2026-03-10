@@ -1,5 +1,3 @@
-
-
 import Hero from '../src/components/sections/Hero'
 import WhatWeDo from '../src/components/sections/WhatWeDo'
 import Industries from '../src/components/sections/Industries'
@@ -8,7 +6,6 @@ import WhyChooseUs from '../src/components/sections/WhyChooseUs'
 import CaseStudies from '../src/components/sections/CaseStudies'
 import TechnologyStack from '../src/components/sections/TechnologyStack'
 import ContactSection from '../src/components/sections/ContactSection'
-import Footer from '../src/components/sections/Footer'
 
 export default function Home() {
   return (
@@ -26,10 +23,7 @@ export default function Home() {
       <CaseStudies />
       <TechnologyStack />
       <ContactSection />
-      <Footer />
       
     </main>
   )
 }
-
-
