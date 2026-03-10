@@ -7,7 +7,7 @@ const offices = [
   {
     city: 'Dubai',
     country: 'UAE',
-    flag: '🇦🇪',
+    flag: '/images/flags/uae.svg',
     address: ['Dubai Internet City', 'Building 1, Office 205', 'Dubai, United Arab Emirates'],
     phone: '+971 4 123 4567',
     email: 'dubai@otaksi.ae',
@@ -17,7 +17,7 @@ const offices = [
   {
     city: 'Lagos',
     country: 'Nigeria',
-    flag: '🇳🇬',
+    flag: '/images/flags/nigeria.svg',
     address: ['Victoria Island', 'Plot 1234, Ahmadu Bello Way', 'Lagos, Nigeria'],
     phone: '+234 1 234 5678',
     email: 'lagos@otaksi.ng',
@@ -111,12 +111,14 @@ export default function ContactInfo() {
                 <div className="relative h-full backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-8 transition-all duration-300">
                   {/* Header */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="text-4xl">{office.flag}</div>
+                    <div className="text-4xl">
+                      <img src={office.flag} alt={office.country + ' flag'} className="w-10 h-10 rounded shadow border border-gray-200 bg-white object-cover" />
+                    </div>
                     <div>
                       <h3 className="text-2xl font-bold mb-1 group-hover:gradient-text transition-all duration-300">
                         {office.city}
                       </h3>
-                      <p className="text-sm text-gray-500">{office.country}</p>
+                      {/* Country name or any other info can go here if needed */}
                     </div>
                   </div>
 
