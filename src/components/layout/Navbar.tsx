@@ -171,7 +171,7 @@ export default function Navbar() {
                                   </div>
                                 </Link>
                                 {idx < link.dropdown.length - 1 && (
-                                  <div key={item.name + '-divider'} className="h-0.5 w-full bg-gradient-to-r from-[#FF2E9F] via-[#5B6CFF] to-[#FF2E9F] my-1 rounded-full" />
+                                  <div key={item.name + '-divider'} className="h-0.5 w-full bg-linear-to-r from-[#FF2E9F] via-[#5B6CFF] to-[#FF2E9F] my-1 rounded-full" />
                                 )}
                               </React.Fragment>
                             ))}

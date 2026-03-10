@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import '../globals.css'
 
 import Navbar from '@/components/layout/Navbar'
-import { NeuralNetworkProvider } from '@/context/NeuralNetworkContext'
-import NeuralNetworkCanvas from '@/components/animations/NeuralNetworkCanvas'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -16,7 +14,7 @@ export const metadata: Metadata = {
   description: 'Premium software engineering consultancy in Dubai. We build intelligent digital systems for modern enterprises across UAE.',
 }
 
-export default function RootLayout({ 
+export default function PublicLayout({ 
   children,
 }: {
   children: React.ReactNode
@@ -30,7 +28,7 @@ export default function RootLayout({
         padding: 0,
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}>
-          {/* Global neural network canvas effect */}
+          <Navbar />
           <div id="hero-section">
             {children}
           </div>
