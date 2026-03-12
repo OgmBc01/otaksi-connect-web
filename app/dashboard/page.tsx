@@ -131,7 +131,7 @@ export default function DashboardPage() {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="glass-card p-6"
       >
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-midnight">Recent Posts</h2>
           <Link
             href="/dashboard/posts"

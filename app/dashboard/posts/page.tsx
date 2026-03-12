@@ -123,7 +123,7 @@ export default function PostsPage() {
       <div className="admin-mesh-bg" />
       <div className="relative z-10">
         {/* Header */}
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col md:flex-row items-start md:items-center justify-between">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-midnight" style={{ fontFamily: 'var(--font-clash)' }}>
               Posts

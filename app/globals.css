@@ -1,3 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 html, body {
   overflow-x: hidden;
   overflow-y: auto;
@@ -183,31 +210,59 @@ html, body {
   border-radius: 1rem;
   overflow: hidden;
 }
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Generic admin card for consistent responsive layout */
+.admin-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.8);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.admin-card > * {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Centralized admin button utilities */
+.admin-button {
+  background: linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  transform: translateY(0);
+}
+.admin-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.98;
+}
+.admin-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.admin-button-secondary {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #0B0616; /* dark text for use on light admin cards */
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.admin-button-secondary:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
 }
 
 /* Legal pages overrides */

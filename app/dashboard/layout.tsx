@@ -13,7 +13,44 @@ const menuItems = [
     icon: '📊',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
   },
-  // Posts is now a dropdown with children
+  // Clients Module
+  {
+    name: 'Clients',
+    href: '/dashboard/clients',
+    icon: '👥',
+    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    children: [
+      { name: 'All Clients', href: '/dashboard/clients', icon: '📋' },
+      { name: 'Add New Client', href: '/dashboard/clients/new', icon: '➕' },
+      { name: 'Contacts', href: '/dashboard/clients/contacts', icon: '👤' },
+    ],
+  },
+  // Engagements Module
+  {
+    name: 'Engagements',
+    href: '/dashboard/engagements',
+    icon: '🚀',
+    gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+    children: [
+      { name: 'All Engagements', href: '/dashboard/engagements', icon: '📋' },
+      { name: 'New Engagement', href: '/dashboard/engagements/new', icon: '➕' },
+      { name: 'Tasks', href: '/dashboard/engagements/tasks', icon: '✅' },
+    ],
+  },
+  // Invoices Module (coming soon)
+  {
+    name: 'Invoices',
+    href: '/dashboard/invoices',
+    icon: '💰',
+    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    children: [
+      { name: 'All Invoices', href: '/dashboard/invoices', icon: '📋' },
+      { name: 'Create Invoice', href: '/dashboard/invoices/new', icon: '➕' },
+      { name: 'Payments', href: '/dashboard/invoices/payments', icon: '💳' },
+      { name: 'Receipts', href: '/dashboard/invoices/receipts', icon: '🧾' },
+    ],
+  },
+  // Posts (existing)
   {
     name: 'Posts',
     href: '/dashboard/posts',
@@ -25,6 +62,17 @@ const menuItems = [
       { name: 'Categories', href: '/dashboard/categories', icon: '📂' },
       { name: 'Tags', href: '/dashboard/tags', icon: '🏷️' },
       { name: 'Media Library', href: '/dashboard/media', icon: '🖼️' },
+    ],
+  },
+  // Employees (for engagement assignments)
+  {
+    name: 'Employees',
+    href: '/dashboard/employees',
+    icon: '👨‍💻',
+    gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+    children: [
+      { name: 'All Employees', href: '/dashboard/employees', icon: '📋' },
+      { name: 'Add Employee', href: '/dashboard/employees/new', icon: '➕' },
     ],
   },
   {
@@ -63,6 +111,18 @@ export default function DashboardLayout({
     getUser()
   }, [supabase])
 
+  // Auto-expand dropdown if a child is active
+  useEffect(() => {
+    menuItems.forEach(item => {
+      if (item.children) {
+        const hasActiveChild = item.children.some(child => pathname === child.href || pathname.startsWith(child.href + '/'))
+        if (hasActiveChild) {
+          setOpenDropdown(item.name)
+        }
+      }
+    })
+  }, [pathname])
+
   return (
     <div className="min-h-screen bg-midnight flex">
       {/* Sidebar (hide on login page) */}
@@ -74,7 +134,7 @@ export default function DashboardLayout({
           className="dashboard-sidebar relative sticky top-0 overflow-hidden border-r border-white/5 bg-midnight z-50"
           style={{ zIndex: 50, height: 'calc(100vh - 80px)' }}
         >
-          {/* Sidebar Background Elements (optional) */}
+          {/* Sidebar Background Elements */}
           <div className="absolute inset-0 bg-gradient-glow opacity-20" />
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full" style={{
@@ -124,7 +184,7 @@ export default function DashboardLayout({
               {menuItems.map((item) => {
                 const hasChildren = Array.isArray((item as any).children) && (item as any).children.length > 0
                 const isActive = hasChildren
-                  ? (item as any).children.some((c: any) => pathname === c.href) || pathname === item.href
+                  ? (item as any).children.some((c: any) => pathname === c.href || pathname.startsWith(c.href + '/')) || pathname === item.href || pathname.startsWith(item.href + '/')
                   : pathname === item.href
 
                 if (hasChildren) {
@@ -177,7 +237,7 @@ export default function DashboardLayout({
                         className="overflow-hidden"
                       >
                         {(item as any).children.map((child: any) => {
-                          const childActive = pathname === child.href
+                          const childActive = pathname === child.href || pathname.startsWith(child.href + '/')
                           return (
                             <Link key={child.href} href={child.href} className="block mb-2">
                               <div className={`flex items-center gap-3 px-3 py-2 rounded-xl ml-8 transition-all duration-200 ${childActive ? 'bg-white/5 text-white' : 'text-gray-400 hover:text-white hover:bg-white/3'}`}>
