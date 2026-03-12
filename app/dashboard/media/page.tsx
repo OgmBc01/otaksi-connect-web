@@ -122,21 +122,21 @@ export default function MediaPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="relative min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-midnight" style={{ fontFamily: 'var(--font-clash)' }}>
             Media
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Library</span>
           </h1>
-          <p className="text-gray-400">Manage your images and media files</p>
+          <p className="text-gray-500">Manage your images and media files</p>
         </div>
       </div>
 
-      {/* Upload Area */}
-      <div className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-8 mb-8">
-        <div className="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center">
+      {/* Upload Area - Now Visible */}
+      <div className="glass-card p-8 mb-8">
+        <div className="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center hover:border-[#5B6CFF] transition-colors">
           <input
             type="file"
             id="file-upload"
@@ -146,21 +146,21 @@ export default function MediaPage() {
           />
           <label
             htmlFor="file-upload"
-            className="cursor-pointer inline-block"
+            className="cursor-pointer inline-block w-full"
           >
             <div className="space-y-4">
-              <div className="text-5xl text-gray-500">📁</div>
+              <div className="text-5xl text-white/60">📁</div>
               {uploading ? (
                 <div className="flex flex-col items-center gap-2">
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#5B6CFF]"></div>
-                  <p className="text-gray-400">Uploading...</p>
+                  <p className="text-white">Uploading...</p>
                 </div>
               ) : (
                 <>
-                  <p className="text-gray-400">
+                  <p className="text-white text-lg">
                     Click to upload or drag and drop
                   </p>
-                  <p className="text-xs text-gray-600">
+                  <p className="text-sm text-gray-400">
                     PNG, JPG, GIF up to 5MB
                   </p>
                 </>
@@ -176,68 +176,63 @@ export default function MediaPage() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#5B6CFF]"></div>
         </div>
       ) : media.length === 0 ? (
-        <div className="text-center py-16 backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10">
-          <p className="text-gray-500 mb-4">No media files yet</p>
+        <div className="glass-card p-16 text-center">
+          <p className="text-gray-400 mb-4">No media files yet</p>
           <label
             htmlFor="file-upload"
-            className="cursor-pointer text-[#5B6CFF] hover:text-white transition-colors"
+            className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] text-white rounded-lg hover:opacity-90 transition-opacity"
           >
             Upload your first image →
           </label>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {media.map((item) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="group relative aspect-square cursor-pointer"
+              className="group relative aspect-square cursor-pointer glass-card overflow-hidden"
               onClick={() => setSelectedImage(item.publicUrl)}
             >
-              <div className="absolute -inset-0.5 rounded-xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]" />
-              <div className="relative w-full h-full rounded-xl overflow-hidden border border-white/10 group-hover:border-white/20 transition-all">
-                <img
-                  src={item.publicUrl}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      copyToClipboard(item.publicUrl)
-                    }}
-                    className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-                    title="Copy URL"
-                  >
-                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleDelete(item.name)
-                    }}
-                    className="p-2 bg-red-500/20 rounded-lg hover:bg-red-500/30 transition-colors"
-                    title="Delete"
-                  >
-                    <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* File Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                  <p className="text-xs text-white truncate">{item.name}</p>
-                  <p className="text-xs text-gray-400">
-                    {item.metadata?.size ? formatFileSize(item.metadata.size) : 'Unknown size'}
-                  </p>
-                </div>
+              <img
+                src={item.publicUrl}
+                alt={item.name}
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay on Hover */}
+              <div className="absolute inset-0 bg-midnight/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    copyToClipboard(item.publicUrl)
+                  }}
+                  className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors border border-white/20"
+                  title="Copy URL"
+                >
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleDelete(item.name)
+                  }}
+                  className="p-2 bg-red-500/20 rounded-lg hover:bg-red-500/30 transition-colors border border-red-500/30"
+                  title="Delete"
+                >
+                  <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+              {/* File Info */}
+              <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-midnight/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                <p className="text-xs text-white truncate">{item.name}</p>
+                <p className="text-xs text-gray-300">
+                  {item.metadata?.size ? formatFileSize(item.metadata.size) : 'Unknown size'}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -253,13 +248,13 @@ export default function MediaPage() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="relative max-w-4xl max-h-[90vh]"
+            className="relative max-w-4xl max-h-[90vh] glass-card p-2"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={selectedImage}
               alt="Preview"
-              className="max-w-full max-h-[90vh] rounded-2xl"
+              className="max-w-full max-h-[90vh] rounded-xl"
             />
             <button
               onClick={() => setSelectedImage(null)}

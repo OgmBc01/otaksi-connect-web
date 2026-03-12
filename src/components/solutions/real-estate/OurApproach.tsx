@@ -182,7 +182,7 @@ export default function OurApproach() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             Our{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Approach</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Approach</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             We combine real estate expertise with innovative technology to transform 

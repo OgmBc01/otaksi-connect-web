@@ -3,9 +3,11 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import NavbarWrapper from '@/components/layout/NavbarWrapper'
 import Footer from '@/components/sections/Footer'
+import FooterClient from '@/components/layout/FooterClient'
 // import { NeuralNetworkProvider } from '@/context/NeuralNetworkContext'
 // import NeuralNetworkCanvas from '@/components/animations/NeuralNetworkCanvas'
 import CookieConsent from '@/components/ui/CookieConsent'
+// import { useEffect, useState } from 'react';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -37,8 +39,8 @@ export default function RootLayout({
           <div id="hero-section">
             {children}
           </div>
-          <Footer />
           <CookieConsent />
+          <FooterClient />
         {/* </NeuralNetworkProvider> */}
       </body>
     </html>

@@ -81,7 +81,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="relative">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -89,7 +89,7 @@ export default function DashboardPage() {
         transition={{ duration: 0.6 }}
         className="mb-8"
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-shadow-slate-950" style={{ fontFamily: 'var(--font-clash)' }}>
           Dashboard
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Overview</span>
         </h1>
@@ -110,7 +110,8 @@ export default function DashboardPage() {
             className="group relative"
           >
             <div className={`absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 bg-gradient-to-r ${stat.color}`} />
-            <div className="relative backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
+            {/* Dark purple card with glass effect */}
+            <div className="relative glass-card p-6">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-3xl">{stat.icon}</span>
                 <span className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.color}`}>
@@ -128,10 +129,10 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-6"
+        className="glass-card p-6"
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold">Recent Posts</h2>
+          <h2 className="text-xl font-bold text-midnight">Recent Posts</h2>
           <Link
             href="/dashboard/posts"
             className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1"
@@ -168,7 +169,9 @@ export default function DashboardPage() {
                     <span>•</span>
                     <span>{post.category?.name || 'Uncategorized'}</span>
                     <span>•</span>
-                    <span>{post.published ? '✅ Published' : '📝 Draft'}</span>
+                    <span className={post.published ? 'text-green-500' : 'text-yellow-500'}>
+                      {post.published ? '✅ Published' : '📝 Draft'}
+                    </span>
                   </div>
                 </div>
                 <Link

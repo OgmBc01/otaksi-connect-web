@@ -143,7 +143,7 @@ export default function ContactForm() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             Send Us a{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Message</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Message</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Have a question or ready to start a project? Fill out the form below and we'll get back to you within 24 hours.
@@ -166,8 +166,8 @@ export default function ContactForm() {
                 className="text-center py-12"
               >
                 <div className="relative w-24 h-24 mx-auto mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full animate-ping opacity-30" />
-                  <div className="relative w-24 h-24 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full animate-ping opacity-30" />
+                  <div className="relative w-24 h-24 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
                     <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>

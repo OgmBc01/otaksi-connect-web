@@ -156,7 +156,7 @@ export default function Hero() {
 
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-r from-midnight via-midnight/80 to-transparent z-10" />
         <Image
           src="/images/solutions/real-estate/hero-proptech.jpg"
           alt="Real Estate Tech Solutions Background"
@@ -167,8 +167,8 @@ export default function Hero() {
       </div>
 
       {/* Gradient Orbs */}
-      <div className="absolute top-40 left-20 w-96 h-96 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow animation-delay-2000" />
+      <div className="absolute top-40 left-20 w-96 h-96 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-linear-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow animation-delay-2000" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -186,7 +186,7 @@ export default function Hero() {
                 <span>•</span>
                 <Link href="/solutions" className="hover:text-white transition-colors">Solutions</Link>
                 <span>•</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Real Estate Tech</span>
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Real Estate Tech</span>
               </nav>
             </motion.div>
 
@@ -199,7 +199,7 @@ export default function Hero() {
               style={{ fontFamily: 'var(--font-clash)' }}
             >
               <span className="text-white">Real Estate</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Tech</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Tech</span>
             </motion.h1>
 
             {/* Description */}
@@ -228,7 +228,7 @@ export default function Hero() {
                 { value: '24/7', label: 'Property Access' },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">{stat.value}</div>
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">{stat.value}</div>
                   <div className="text-sm text-gray-500">{stat.label}</div>
                 </div>
               ))}
@@ -259,7 +259,7 @@ export default function Hero() {
           >
             <div className="relative aspect-square max-w-lg mx-auto">
               {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl blur-3xl opacity-30" />
+              <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl blur-3xl opacity-30" />
               
               {/* Image Container */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10">
@@ -303,7 +303,7 @@ export default function Hero() {
               repeat: Infinity,
               repeatType: 'loop',
             }}
-            className="w-1 h-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mt-2"
+            className="w-1 h-2 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mt-2"
           />
         </div>
       </motion.div>

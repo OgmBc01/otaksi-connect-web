@@ -219,7 +219,7 @@ export default function Technologies() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             PropTech{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Technology Stack</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Technology Stack</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             We leverage industry-leading platforms and tools to build innovative 
@@ -259,7 +259,7 @@ export default function Technologies() {
                       fill
                       className="object-cover opacity-50 group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/80 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-r from-midnight via-midnight/80 to-transparent" />
                     
                     {/* Category Header */}
                     <div className="absolute bottom-4 left-6 flex items-center gap-3">
@@ -282,7 +282,7 @@ export default function Technologies() {
                             <span className="text-sm font-medium text-white">{tech.name}</span>
                             <p className="text-xs text-gray-500">{tech.description}</p>
                           </div>
-                          <span className="text-sm text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">
+                          <span className="text-sm text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">
                             {tech.level}%
                           </span>
                         </div>

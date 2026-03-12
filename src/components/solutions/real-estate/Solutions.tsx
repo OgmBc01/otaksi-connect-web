@@ -238,7 +238,7 @@ export default function Solutions() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             PropTech{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Solutions</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Solutions</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Comprehensive technology solutions designed for every aspect of the 
@@ -293,7 +293,7 @@ export default function Solutions() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF2E9F] group-hover:to-[#5B6CFF] transition-all duration-300">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-[#FF2E9F] group-hover:to-[#5B6CFF] transition-all duration-300">
                       {solution.title}
                     </h3>
                     <p className="text-sm text-gray-400 mb-4">

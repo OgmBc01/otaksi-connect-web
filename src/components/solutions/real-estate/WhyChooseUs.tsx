@@ -209,8 +209,8 @@ export default function WhyChooseUs() {
       </div>
 
       {/* Data Stream Divider */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#5B6CFF] to-transparent opacity-30" />
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FF2E9F] to-transparent opacity-30" />
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#5B6CFF] to-transparent opacity-30" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#FF2E9F] to-transparent opacity-30" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -223,7 +223,7 @@ export default function WhyChooseUs() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             Why Choose Us for{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">PropTech</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">PropTech</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             We combine real estate expertise with innovative technology to deliver 
@@ -263,7 +263,7 @@ export default function WhyChooseUs() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/50 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-midnight via-midnight/50 to-transparent" />
                     
                     {/* Icon Overlay */}
                     <div className="absolute bottom-4 left-4">
@@ -278,7 +278,7 @@ export default function WhyChooseUs() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF2E9F] group-hover:to-[#5B6CFF] transition-all duration-300">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-[#FF2E9F] group-hover:to-[#5B6CFF] transition-all duration-300">
                       {reason.title}
                     </h3>
                     <p className="text-sm text-gray-400 mb-4 leading-relaxed">

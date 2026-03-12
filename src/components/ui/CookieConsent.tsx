@@ -99,7 +99,7 @@ export default function CookieConsent() {
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6">
                 {/* Icon */}
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
                     <span className="text-2xl">🍪</span>
                   </div>
                 </div>
@@ -139,7 +139,7 @@ export default function CookieConsent() {
                   </button>
                   <button
                     onClick={handleAcceptAll}
-                    className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg hover:opacity-90 transition-opacity"
+                    className="px-4 py-2 text-sm font-medium text-white bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg hover:opacity-90 transition-opacity"
                   >
                     Accept All
                   </button>
@@ -243,7 +243,7 @@ export default function CookieConsent() {
               <div className="flex gap-3">
                 <button
                   onClick={handleAcceptAll}
-                  className="flex-1 px-4 py-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                  className="flex-1 px-4 py-2 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] text-white rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
                 >
                   Accept All
                 </button>

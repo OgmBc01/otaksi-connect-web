@@ -185,34 +185,34 @@ export default function EditPostPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="relative p-8 min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-midnight" style={{ fontFamily: 'var(--font-clash)' }}>
             Edit
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Post</span>
           </h1>
-          <p className="text-gray-400">Update your blog post</p>
+          <p className="text-midnight">Update your blog post</p>
         </div>
         <div className="flex gap-3">
           <Link
             href="/dashboard/posts"
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-colors"
+            className="admin-button admin-button-secondary bg-white font-semibold px-4 py-2"
           >
             Cancel
           </Link>
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-medium text-white hover:bg-white/10 transition-colors disabled:opacity-50"
+            className="admin-button bg-white text-midnight font-semibold px-4 py-2"
           >
             Save Draft
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="px-4 py-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-sm font-medium text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="admin-button bg-white text-midnight font-semibold px-4 py-2"
           >
             {saving ? 'Updating...' : published ? 'Update' : 'Publish'}
           </button>
@@ -223,37 +223,37 @@ export default function EditPostPage() {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-6">
           {/* Title */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <label className="block text-sm font-medium text-gray-400 mb-2">
+          <div className="bg-white rounded-2xl border p-6">
+            <label className="block text-sm font-medium text-midnight mb-2">
               Post Title *
             </label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-[#5B6CFF] transition-colors text-white text-xl"
+              className="admin-input text-xl"
               placeholder="Enter post title"
             />
           </div>
 
           {/* Rich Text Editor */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <label className="block text-sm font-medium text-gray-400 mb-2">
+          <div className="bg-white rounded-2xl border p-6">
+            <label className="block text-sm font-medium text-midnight mb-2">
               Content *
             </label>
             <RichTextEditor content={content} onChange={setContent} />
           </div>
 
           {/* Excerpt */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <label className="block text-sm font-medium text-gray-400 mb-2">
+          <div className="bg-white rounded-2xl border p-6">
+            <label className="block text-sm font-medium text-midnight mb-2">
               Excerpt
             </label>
             <textarea
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               rows={3}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-[#5B6CFF] transition-colors text-white resize-none"
+              className="admin-input resize-none"
               placeholder="Brief summary of your post (optional)"
             />
           </div>
@@ -262,8 +262,8 @@ export default function EditPostPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Featured Image */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <h3 className="font-medium text-white mb-4">Featured Image</h3>
+          <div className="bg-white rounded-2xl border p-6">
+            <h3 className="font-medium text-midnight mb-4">Featured Image</h3>
             <ImageUploader
               onImageUploaded={(url) => setFeaturedImage(url)}
               currentImage={featuredImage}
@@ -271,16 +271,16 @@ export default function EditPostPage() {
           </div>
 
           {/* Category */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <h3 className="font-medium text-white mb-4">Category</h3>
+          <div className="bg-white rounded-2xl border p-6">
+            <h3 className="font-medium text-midnight mb-4">Category</h3>
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-[#5B6CFF] transition-colors text-white"
+              className="admin-input"
             >
-              <option value="" className="bg-midnight">Select a category</option>
+              <option value="" className="bg-white text-midnight">Select a category</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id} className="bg-midnight">
+                <option key={cat.id} value={cat.id} className="bg-white text-midnight">
                   {cat.name}
                 </option>
               ))}
@@ -288,8 +288,8 @@ export default function EditPostPage() {
           </div>
 
           {/* Tags */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <h3 className="font-medium text-white mb-4">Tags</h3>
+          <div className="bg-white rounded-2xl border p-6">
+            <h3 className="font-medium text-midnight mb-4">Tags</h3>
             <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <button
@@ -301,10 +301,10 @@ export default function EditPostPage() {
                         : [...prev, tag.id]
                     )
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium bg-white text-midnight transition-all ${
                     selectedTags.includes(tag.id)
-                      ? 'bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] text-white'
-                      : 'bg-white/5 text-gray-400 hover:text-white'
+                      ? 'bg-[#5B6CFF] text-white font-semibold'
+                      : 'hover:bg-[#F3F4F6]'
                   }`}
                 >
                   {tag.name}
@@ -314,30 +314,30 @@ export default function EditPostPage() {
           </div>
 
           {/* SEO Settings */}
-          <div className="backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 p-6">
-            <h3 className="font-medium text-white mb-4">SEO Settings</h3>
+          <div className="bg-white rounded-2xl border p-6">
+            <h3 className="font-medium text-midnight mb-4">SEO Settings</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">
+                <label className="block text-sm font-medium text-midnight mb-2">
                   Meta Title
                 </label>
                 <input
                   type="text"
                   value={metaTitle}
                   onChange={(e) => setMetaTitle(e.target.value)}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-[#5B6CFF] transition-colors text-white text-sm"
+                  className="admin-input text-sm"
                   placeholder="SEO title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">
+                <label className="block text-sm font-medium text-midnight mb-2">
                   Meta Description
                 </label>
                 <textarea
                   value={metaDescription}
                   onChange={(e) => setMetaDescription(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-[#5B6CFF] transition-colors text-white text-sm resize-none"
+                  className="admin-input text-sm resize-none"
                   placeholder="SEO description"
                 />
               </div>

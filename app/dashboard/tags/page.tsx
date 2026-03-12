@@ -138,19 +138,19 @@ const fetchTags = async () => {
   }
 
   return (
-    <div className="p-8">
+    <div className="relative p-8 min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-midnight" style={{ fontFamily: 'var(--font-clash)' }}>
             Tags
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Management</span>
           </h1>
-          <p className="text-gray-400">Manage your content tags</p>
+          <p className="text-midnight">Manage your content tags</p>
         </div>
         <button
           onClick={() => setShowNewForm(true)}
-          className="px-4 py-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-sm font-medium text-white hover:opacity-90 transition-opacity flex items-center gap-2"
+          className="admin-button flex items-center gap-2"
         >
           <span>+</span>
           New Tag
@@ -258,9 +258,9 @@ const fetchTags = async () => {
                       }}
                     >
                       <div className="absolute -inset-0.5 rounded-full opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]" />
-                      <div className="relative px-4 py-2 rounded-full bg-white/5 border border-white/10 group-hover:border-white/20 flex items-center gap-2">
-                        <span className="text-sm text-gray-300">{tag.name}</span>
-                        <span className="text-xs px-1.5 py-0.5 rounded-full bg-white/10 text-gray-400">
+                      <div className="relative px-4 py-2 rounded-full bg-white border-2 border-[#5B6CFF] flex items-center gap-2">
+                        <span className="text-sm text-midnight font-semibold">{tag.name}</span>
+                        <span className="text-xs px-1.5 py-0.5 rounded-full bg-white border border-[#5B6CFF] text-midnight">
                           {tag.post_count || 0}
                         </span>
                         

@@ -7,45 +7,29 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 const menuItems = [
-  { 
-    name: 'Dashboard', 
-    href: '/dashboard', 
+  {
+    name: 'Dashboard',
+    href: '/dashboard',
     icon: '📊',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
   },
-  { 
-    name: 'Posts', 
-    href: '/dashboard/posts', 
+  // Posts is now a dropdown with children
+  {
+    name: 'Posts',
+    href: '/dashboard/posts',
     icon: '📝',
-    gradient: 'from-[#5B6CFF] to-[#FF2E9F]'
+    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    children: [
+      { name: 'All Posts', href: '/dashboard/posts', icon: '📝' },
+      { name: 'New Post', href: '/dashboard/posts/new', icon: '✏️' },
+      { name: 'Categories', href: '/dashboard/categories', icon: '📂' },
+      { name: 'Tags', href: '/dashboard/tags', icon: '🏷️' },
+      { name: 'Media Library', href: '/dashboard/media', icon: '🖼️' },
+    ],
   },
-  { 
-    name: 'New Post', 
-    href: '/dashboard/posts/new', 
-    icon: '✏️',
-    gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
-  },
-  { 
-    name: 'Categories', 
-    href: '/dashboard/categories', 
-    icon: '📂',
-    gradient: 'from-[#5B6CFF] to-[#FF2E9F]'
-  },
-  { 
-    name: 'Tags', 
-    href: '/dashboard/tags', 
-    icon: '🏷️',
-    gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
-  },
-  { 
-    name: 'Media Library', 
-    href: '/dashboard/media', 
-    icon: '🖼️',
-    gradient: 'from-[#5B6CFF] to-[#FF2E9F]'
-  },
-  { 
-    name: 'Profile', 
-    href: '/dashboard/profile', 
+  {
+    name: 'Profile',
+    href: '/dashboard/profile',
     icon: '👤',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
   },
@@ -58,6 +42,7 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [user, setUser] = useState<any>(null)
   const supabase = createClient()
 
@@ -86,10 +71,11 @@ export default function DashboardLayout({
           initial={{ width: isCollapsed ? 80 : 280 }}
           animate={{ width: isCollapsed ? 80 : 280 }}
           transition={{ duration: 0.3 }}
-          className="relative h-screen sticky top-0 overflow-hidden border-r border-white/5"
+          className="dashboard-sidebar relative sticky top-0 overflow-hidden border-r border-white/5 bg-midnight z-50"
+          style={{ zIndex: 50, height: 'calc(100vh - 80px)' }}
         >
-          {/* Sidebar Background with Neural Animation */}
-          <div className="absolute inset-0 bg-gradient-glow" />
+          {/* Sidebar Background Elements (optional) */}
+          <div className="absolute inset-0 bg-gradient-glow opacity-20" />
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full" style={{
               backgroundImage: `
@@ -99,6 +85,7 @@ export default function DashboardLayout({
               backgroundSize: '30px 30px'
             }} />
           </div>
+
           <div className="relative z-10 h-full flex flex-col">
             {/* Logo Area */}
             <div className="p-6 border-b border-white/5">
@@ -120,6 +107,7 @@ export default function DashboardLayout({
                   </motion.span>
                 )}
               </Link>
+              
               {/* Toggle Button */}
               <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
@@ -130,10 +118,83 @@ export default function DashboardLayout({
                 </svg>
               </button>
             </div>
-            {/* Navigation Menu */}
-            <nav className="flex-1 overflow-y-auto py-6 px-3">
+            
+            {/* Navigation Menu - with hidden scrollbar */}
+            <nav className="flex-1 overflow-y-auto py-6 px-3 scrollbar-hide">
               {menuItems.map((item) => {
-                const isActive = pathname === item.href
+                const hasChildren = Array.isArray((item as any).children) && (item as any).children.length > 0
+                const isActive = hasChildren
+                  ? (item as any).children.some((c: any) => pathname === c.href) || pathname === item.href
+                  : pathname === item.href
+
+                if (hasChildren) {
+                  return (
+                    <div key={item.href} className="mb-2">
+                      <button
+                        onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
+                        className={`w-full text-left relative group block`}
+                        aria-expanded={openDropdown === item.name}
+                      >
+                        <div className={`
+                          relative flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300
+                          ${isActive
+                            ? `bg-gradient-to-r ${item.gradient} bg-opacity-20 text-white`
+                            : 'hover:bg-white/5 text-gray-400 hover:text-white'
+                          }
+                        `}>
+                          {isActive && (
+                            <motion.div
+                              layoutId="activeIndicator"
+                              className={`absolute left-0 w-1 h-8 rounded-full bg-gradient-to-r ${item.gradient}`}
+                            />
+                          )}
+                          <span className="text-xl">{item.icon}</span>
+                          {!isCollapsed && (
+                            <motion.div className="flex-1 flex items-center justify-between">
+                              <motion.span
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="text-sm font-medium"
+                              >
+                                {item.name}
+                              </motion.span>
+                              <motion.span
+                                animate={{ rotate: openDropdown === item.name ? 90 : 0 }}
+                                className="text-xs text-gray-400"
+                              >
+                                ▶
+                              </motion.span>
+                            </motion.div>
+                          )}
+                        </div>
+                      </button>
+
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={openDropdown === item.name ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="overflow-hidden"
+                      >
+                        {(item as any).children.map((child: any) => {
+                          const childActive = pathname === child.href
+                          return (
+                            <Link key={child.href} href={child.href} className="block mb-2">
+                              <div className={`flex items-center gap-3 px-3 py-2 rounded-xl ml-8 transition-all duration-200 ${childActive ? 'bg-white/5 text-white' : 'text-gray-400 hover:text-white hover:bg-white/3'}`}>
+                                <span className="text-lg">{child.icon}</span>
+                                {!isCollapsed && (
+                                  <span className="text-sm">{child.name}</span>
+                                )}
+                              </div>
+                            </Link>
+                          )
+                        })}
+                      </motion.div>
+                    </div>
+                  )
+                }
+
+                // default single item render
                 return (
                   <Link
                     key={item.href}
@@ -143,7 +204,7 @@ export default function DashboardLayout({
                     <div className={`
                       relative flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300
                       ${isActive 
-                        ? `bg-gradient-to-r ${item.gradient} bg-opacity-10 text-white` 
+                        ? `bg-gradient-to-r ${item.gradient} bg-opacity-20 text-white` 
                         : 'hover:bg-white/5 text-gray-400 hover:text-white'
                       }
                     `}>
@@ -172,6 +233,7 @@ export default function DashboardLayout({
                 )
               })}
             </nav>
+            
             {/* User Info */}
             {user && (
               <div className="p-6 border-t border-white/5">
@@ -198,15 +260,40 @@ export default function DashboardLayout({
           </div>
         </motion.aside>
       )}
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="relative min-h-screen">
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-glow" />
-          {/* Content */}
-          <div className="relative z-10">
-            {children}
-          </div>
+      
+      {/* Main Content Area - with mesh background */}
+      <main className="flex-1 relative bg-white z-10 flex flex-col" style={{ minHeight: '100vh' }}>
+        {/* Admin Mesh Background */}
+        <div className="admin-mesh-bg" />
+        {/* Content wrapper, scrollable and fits above footer */}
+        <div className="flex-1 p-8 overflow-y-auto" style={{ marginBottom: 80 }}>
+          {children}
+        </div>
+        {/* Footer - Dark purple (admin only, full width, z-10) */}
+        <div className="fixed left-0 right-0 bottom-0 z-10" style={{ height: 80 }}>
+          <footer className="w-full bg-midnight border-t border-white/5 py-6 px-8">
+            <div className="flex items-center justify-between max-w-full">
+              <p className="text-sm text-gray-500">
+                © {new Date().getFullYear()} Otaksi Connect. All rights reserved.
+              </p>
+              <div className="flex gap-6">
+                <Link href="/privacy" className="text-xs text-gray-500 hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="text-xs text-gray-500 hover:text-white transition-colors">
+                  Terms of Service
+                </Link>
+                <Link href="/cookies" className="text-xs text-gray-500 hover:text-white transition-colors">
+                  Cookie Policy
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-500">Serving</span>
+                <span className="text-lg">🇦🇪</span>
+                <span className="text-sm text-gray-400">UAE</span>
+              </div>
+            </div>
+          </footer>
         </div>
       </main>
     </div>
