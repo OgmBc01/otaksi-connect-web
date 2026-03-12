@@ -216,11 +216,50 @@ html, body {
   width: 100%;
   box-sizing: border-box;
   background: rgba(255,255,255,0.8);
+  color: #0B0616; /* dark text for light admin-card background */
   border-radius: 1rem;
   padding: 1rem;
 }
 .admin-card > * {
   box-sizing: border-box;
+}
+.admin-card, .admin-card :where(h1,h2,h3,h4,h5,h6,p,span,div,li,a,label,small,strong,em) {
+  color: #0B0616;
+}
+
+/* Admin content typography: clearer heading and paragraph colors */
+.admin-card h1,
+.admin-card h2,
+.admin-card h3,
+.admin-card h4 {
+  color: #111827; /* gray-900 for headings */
+  font-weight: 700;
+}
+
+.admin-card p,
+.admin-card li,
+.admin-card small,
+.admin-card label {
+  color: #374151; /* gray-700 for body text */
+}
+
+/* Ensure readable colors for content inside light admin cards */
+.admin-card .text-admin-muted {
+  color: #6B7280 !important; /* gray-500 for muted labels */
+}
+.admin-card .text-white {
+  color: #0B0616 !important; /* override any white text inside admin-card */
+}
+.admin-card .admin-input,
+.admin-card .admin-select {
+  background: #F8FAFC !important; /* light input background */
+  border: 1px solid #E5E7EB !important;
+  color: #0B0616 !important;
+}
+.admin-card .admin-button-secondary {
+  color: #0B0616 !important;
+  background: rgba(11,6,22,0.04) !important;
+  border-color: rgba(11,6,22,0.06) !important;
 }
 
 /* Centralized admin button utilities */
