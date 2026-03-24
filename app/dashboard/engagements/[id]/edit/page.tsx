@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 
 type Client = {
@@ -29,38 +29,28 @@ type Task = {
   due_date: string
   estimated_hours: number
   hourly_rate: number
-  total_amount?: number
+  status?: string
 }
 
 type PaymentTerms = 'full' | 'half' | 'quarterly' | 'monthly' | 'milestone'
 type BillingCycle = 'one-time' | 'monthly' | 'quarterly' | 'yearly'
 type EngagementStatus = 'draft' | 'active' | 'on-hold' | 'completed' | 'cancelled'
 
-export default function NewEngagementPage() {
-  const searchParams = useSearchParams()
-  const preselectedClient = searchParams.get('client')
+export default function EditEngagementPage() {
+  const params = useParams()
+  const engagementId = params.id as string
   
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [clients, setClients] = useState<Client[]>([])
   const [employees, setEmployees] = useState<Employee[]>([])
-  const [tasks, setTasks] = useState<Task[]>([
-    { 
-      task_name: '', 
-      description: '', 
-      assigned_to: '', 
-      start_date: '', 
-      due_date: '', 
-      estimated_hours: 0,
-      hourly_rate: 0
-    }
-  ])
+  const [tasks, setTasks] = useState<Task[]>([])
   
   const router = useRouter()
   const supabase = createClient()
 
   const [formData, setFormData] = useState({
-    client_id: preselectedClient || '',
+    client_id: '',
     project_name: '',
     description: '',
     start_date: '',
@@ -76,9 +66,53 @@ export default function NewEngagementPage() {
   })
 
   useEffect(() => {
+    fetchEngagementData()
     fetchClients()
     fetchEmployees()
-  }, [])
+  }, [engagementId])
+
+  const fetchEngagementData = async () => {
+    setLoading(true)
+
+    // Fetch engagement details
+    const { data: engagementData, error: engagementError } = await supabase
+      .from('engagements')
+      .select('*')
+      .eq('id', engagementId)
+      .single()
+
+    if (engagementError || !engagementData) {
+      console.error('Error fetching engagement:', engagementError)
+      router.push('/dashboard/engagements')
+      return
+    }
+
+    setFormData({
+      client_id: engagementData.client_id,
+      project_name: engagementData.project_name,
+      description: engagementData.description || '',
+      start_date: engagementData.start_date,
+      end_date: engagementData.end_date || '',
+      status: engagementData.status,
+      payment_terms: engagementData.payment_terms,
+      deposit_amount: engagementData.deposit_amount || 0,
+      deposit_paid: engagementData.deposit_paid || false,
+      total_amount: engagementData.total_amount,
+      currency: engagementData.currency,
+      billing_cycle: engagementData.billing_cycle,
+      invoice_notes: engagementData.invoice_notes || '',
+    })
+
+    // Fetch tasks
+    const { data: tasksData } = await supabase
+      .from('engagement_tasks')
+      .select('*')
+      .eq('engagement_id', engagementId)
+      .order('created_at')
+
+    setTasks(tasksData || [])
+    setLoading(false)
+  }
 
   const fetchClients = async () => {
     const { data } = await supabase
@@ -100,107 +134,81 @@ export default function NewEngagementPage() {
     setEmployees(data || [])
   }
 
-  const generateEngagementCode = async () => {
-    const { data: lastEngagement } = await supabase
-      .from('engagements')
-      .select('engagement_code')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single()
-
-    let nextNumber = 1
-    if (lastEngagement) {
-      const lastNumber = parseInt(lastEngagement.engagement_code.replace('ENG', ''))
-      nextNumber = lastNumber + 1
-    }
-    return `ENG${String(nextNumber).padStart(4, '0')}`
-  }
-
   const calculateTotalAmount = () => {
-    const tasksTotal = tasks.reduce((sum, task) => {
-      return sum + (task.estimated_hours * task.hourly_rate)
+    return tasks.reduce((sum, task) => {
+      return sum + ((task.estimated_hours || 0) * (task.hourly_rate || 0))
     }, 0)
-    return tasksTotal
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
 
-    try {
-      const engagementCode = await generateEngagementCode()
-      const totalAmount = calculateTotalAmount()
+    const totalAmount = calculateTotalAmount()
 
-      // Insert engagement
-      const { data: engagement, error: engagementError } = await supabase
-        .from('engagements')
-        .insert([{
-          engagement_code: engagementCode,
-          client_id: formData.client_id,
-          project_name: formData.project_name,
-          description: formData.description || null,
-          start_date: formData.start_date,
-          end_date: formData.end_date || null,
-          status: formData.status,
-          payment_terms: formData.payment_terms,
-          deposit_amount: formData.deposit_amount || 0,
-          deposit_paid: formData.deposit_paid,
-          total_amount: totalAmount,
-          currency: formData.currency,
-          billing_cycle: formData.billing_cycle,
-          invoice_notes: formData.invoice_notes || null,
-        }])
-        .select()
-        .single()
+    // Update engagement
+    const { error: engagementError } = await supabase
+      .from('engagements')
+      .update({
+        client_id: formData.client_id,
+        project_name: formData.project_name,
+        description: formData.description || null,
+        start_date: formData.start_date,
+        end_date: formData.end_date || null,
+        status: formData.status,
+        payment_terms: formData.payment_terms,
+        deposit_amount: formData.deposit_amount || 0,
+        deposit_paid: formData.deposit_paid,
+        total_amount: totalAmount,
+        currency: formData.currency,
+        billing_cycle: formData.billing_cycle,
+        invoice_notes: formData.invoice_notes || null,
+      })
+      .eq('id', engagementId)
 
-      if (engagementError) {
-        console.error('Error creating engagement:', engagementError)
-        alert(`Failed to create engagement: ${engagementError.message}`)
+    if (engagementError) {
+      console.error('Error updating engagement:', engagementError)
+      alert(`Failed to update engagement: ${engagementError.message}`)
+      setSaving(false)
+      return
+    }
+
+    // Handle tasks - delete existing and insert updated ones
+    await supabase
+      .from('engagement_tasks')
+      .delete()
+      .eq('engagement_id', engagementId)
+
+    // Filter out empty tasks
+    const validTasks = tasks.filter(task => task.task_name && task.task_name.trim() !== '')
+    
+    if (validTasks.length > 0) {
+      const tasksToInsert = validTasks.map(task => ({
+        engagement_id: engagementId,
+        task_name: task.task_name,
+        description: task.description || null,
+        assigned_to: task.assigned_to && task.assigned_to !== '' ? task.assigned_to : null,
+        start_date: task.start_date || null,
+        due_date: task.due_date || null,
+        estimated_hours: task.estimated_hours || 0,
+        hourly_rate: task.hourly_rate || 0,
+        status: task.status || 'pending',
+      }))
+
+      const { error: tasksError } = await supabase
+        .from('engagement_tasks')
+        .insert(tasksToInsert)
+
+      if (tasksError) {
+        console.error('Error updating tasks:', tasksError)
+        alert(`Failed to update tasks: ${tasksError.message}`)
         setSaving(false)
         return
       }
-
-      // Insert tasks - filter out empty tasks and handle NULL values
-      if (tasks.length > 0) {
-        // Filter out tasks with empty task_name (don't insert empty tasks)
-        const validTasks = tasks.filter(task => task.task_name && task.task_name.trim() !== '')
-        
-        if (validTasks.length > 0) {
-          const tasksToInsert = validTasks.map(task => ({
-            engagement_id: engagement.id,
-            task_name: task.task_name,
-            description: task.description || null,
-            assigned_to: task.assigned_to && task.assigned_to !== '' ? task.assigned_to : null, // Convert empty string to null
-            start_date: task.start_date || null,
-            due_date: task.due_date || null,
-            estimated_hours: task.estimated_hours || 0,
-            hourly_rate: task.hourly_rate || 0,
-            status: 'pending',
-          }))
-
-          console.log('Tasks to insert:', tasksToInsert)
-
-          const { error: tasksError } = await supabase
-            .from('engagement_tasks')
-            .insert(tasksToInsert)
-
-          if (tasksError) {
-            console.error('Error adding tasks:', tasksError)
-            alert(`Failed to add tasks: ${tasksError.message}`)
-            // Don't redirect if tasks failed, but engagement was created
-            setSaving(false)
-            return
-          }
-        }
-      }
-
-      setSaving(false)
-      router.push('/dashboard/engagements')
-    } catch (error) {
-      console.error('Unexpected error:', error)
-      alert('An unexpected error occurred')
-      setSaving(false)
     }
+
+    setSaving(false)
+    router.push(`/dashboard/engagements/${engagementId}`)
   }
 
   const addTask = () => {
@@ -213,7 +221,8 @@ export default function NewEngagementPage() {
         start_date: '', 
         due_date: '', 
         estimated_hours: 0,
-        hourly_rate: 0
+        hourly_rate: 0,
+        status: 'pending'
       }
     ])
   }
@@ -223,8 +232,7 @@ export default function NewEngagementPage() {
       alert('You must have at least one task')
       return
     }
-    const newTasks = tasks.filter((_, i) => i !== index)
-    setTasks(newTasks)
+    setTasks(tasks.filter((_, i) => i !== index))
   }
 
   const updateTask = (index: number, field: keyof Task, value: any) => {
@@ -242,6 +250,14 @@ export default function NewEngagementPage() {
     setTasks(newTasks)
   }
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#5B6CFF]"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="relative p-8 min-h-screen">
       <div className="admin-mesh-bg" />
@@ -250,17 +266,17 @@ export default function NewEngagementPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-midnight" style={{ fontFamily: 'var(--font-clash)' }}>
-              Create New
+              Edit
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Engagement</span>
             </h1>
-            <p className="text-admin-muted">Set up a new client project or engagement</p>
+            <p className="text-admin-muted">Update engagement details and tasks</p>
           </div>
           <Link
-            href="/dashboard/engagements"
+            href={`/dashboard/engagements/${engagementId}`}
             className="admin-button-secondary flex items-center gap-2"
           >
             <span>←</span>
-            Back to Engagements
+            Back to Engagement
           </Link>
         </div>
 
@@ -274,7 +290,7 @@ export default function NewEngagementPage() {
                   Client *
                 </label>
                 <select
-                  value={formData.client_id}
+                  value={formData.client_id ?? ''}
                   onChange={(e) => setFormData({ ...formData, client_id: e.target.value })}
                   required
                   className="admin-select"
@@ -298,7 +314,6 @@ export default function NewEngagementPage() {
                   onChange={(e) => setFormData({ ...formData, project_name: e.target.value })}
                   required
                   className="admin-input"
-                  placeholder="e.g., Website Development Project"
                 />
               </div>
 
@@ -311,7 +326,6 @@ export default function NewEngagementPage() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
                   className="admin-input resize-none"
-                  placeholder="Detailed description of the engagement..."
                 />
               </div>
 
@@ -339,6 +353,23 @@ export default function NewEngagementPage() {
                   className="admin-input"
                 />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-admin-muted mb-2">
+                  Status
+                </label>
+                <select
+                  value={formData.status ?? ''}
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value as EngagementStatus })}
+                  className="admin-select"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="active">Active</option>
+                  <option value="on-hold">On Hold</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -351,7 +382,7 @@ export default function NewEngagementPage() {
                   Payment Terms *
                 </label>
                 <select
-                  value={formData.payment_terms}
+                  value={formData.payment_terms ?? ''}
                   onChange={(e) => setFormData({ ...formData, payment_terms: e.target.value as PaymentTerms })}
                   className="admin-select"
                 >
@@ -368,7 +399,7 @@ export default function NewEngagementPage() {
                   Billing Cycle
                 </label>
                 <select
-                  value={formData.billing_cycle}
+                  value={formData.billing_cycle ?? ''}
                   onChange={(e) => setFormData({ ...formData, billing_cycle: e.target.value as BillingCycle })}
                   className="admin-select"
                 >
@@ -384,7 +415,7 @@ export default function NewEngagementPage() {
                   Currency
                 </label>
                 <select
-                  value={formData.currency}
+                  value={formData.currency ?? ''}
                   onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
                   className="admin-select"
                 >
@@ -395,7 +426,6 @@ export default function NewEngagementPage() {
                 </select>
               </div>
 
-              {/* Deposit Amount - Only show when payment terms is 'half' */}
               {formData.payment_terms === 'half' && (
                 <div>
                   <label className="block text-sm font-medium text-admin-muted mb-2">
@@ -422,7 +452,6 @@ export default function NewEngagementPage() {
                   onChange={(e) => setFormData({ ...formData, invoice_notes: e.target.value })}
                   rows={2}
                   className="admin-input resize-none"
-                  placeholder="Notes to appear on invoices..."
                 />
               </div>
             </div>
@@ -460,14 +489,14 @@ export default function NewEngagementPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-admin-muted mb-2">
-                      Task Name
+                      Task Name *
                     </label>
                     <input
                       type="text"
                       value={task.task_name}
                       onChange={(e) => updateTask(index, 'task_name', e.target.value)}
+                      required={index === 0}
                       className="admin-input"
-                      placeholder="e.g., Design Homepage (optional)"
                     />
                   </div>
 
@@ -480,7 +509,6 @@ export default function NewEngagementPage() {
                       onChange={(e) => updateTask(index, 'description', e.target.value)}
                       rows={2}
                       className="admin-input resize-none"
-                      placeholder="Task description..."
                     />
                   </div>
 
@@ -511,7 +539,6 @@ export default function NewEngagementPage() {
                       value={task.hourly_rate || ''}
                       onChange={(e) => updateTask(index, 'hourly_rate', parseFloat(e.target.value) || 0)}
                       className="admin-input"
-                      placeholder="0.00"
                       step="0.01"
                       min="0"
                     />
@@ -550,10 +577,25 @@ export default function NewEngagementPage() {
                       value={task.estimated_hours || ''}
                       onChange={(e) => updateTask(index, 'estimated_hours', parseFloat(e.target.value) || 0)}
                       className="admin-input"
-                      placeholder="0"
                       step="0.5"
                       min="0"
                     />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-admin-muted mb-2">
+                      Status
+                    </label>
+                    <select
+                      value={task.status || 'pending'}
+                      onChange={(e) => updateTask(index, 'status', e.target.value)}
+                      className="admin-select"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="in-progress">In Progress</option>
+                      <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
                   </div>
 
                   <div>
@@ -582,7 +624,7 @@ export default function NewEngagementPage() {
           {/* Form Actions */}
           <div className="flex gap-4 justify-end">
             <Link
-              href="/dashboard/engagements"
+              href={`/dashboard/engagements/${engagementId}`}
               className="admin-button-secondary px-6 py-3"
             >
               Cancel
@@ -595,10 +637,10 @@ export default function NewEngagementPage() {
               {saving ? (
                 <span className="flex items-center gap-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  Creating...
+                  Saving...
                 </span>
               ) : (
-                'Create Engagement'
+                'Save Changes'
               )}
             </button>
           </div>

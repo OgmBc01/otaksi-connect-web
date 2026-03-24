@@ -67,21 +67,31 @@ export default function NewClientPage() {
     // Generate client code
     const clientCode = await generateClientCode()
 
+
     // Insert client
     const { data: client, error: clientError } = await supabase
       .from('clients')
-      .insert([{
-        client_code: clientCode,
-        ...formData,
-      }])
+      .insert([
+        {
+          client_code: clientCode,
+          ...formData,
+        },
+      ])
       .select()
-      .single()
+      .single();
 
     if (clientError) {
-      console.error('Error creating client:', clientError)
-      alert('Failed to create client')
-      setSaving(false)
-      return
+      // Improved error logging
+      console.error('Error creating client:', clientError);
+      alert(
+        'Failed to create client.\n' +
+        (clientError.message ? `Message: ${clientError.message}\n` : '') +
+        (clientError.details ? `Details: ${clientError.details}\n` : '') +
+        (clientError.hint ? `Hint: ${clientError.hint}\n` : '') +
+        `Full error: ${JSON.stringify(clientError, null, 2)}`
+      );
+      setSaving(false);
+      return;
     }
 
     // Insert contacts
@@ -89,14 +99,22 @@ export default function NewClientPage() {
       const contactsToInsert = contacts.map(contact => ({
         client_id: client.id,
         ...contact,
-      }))
+      }));
 
       const { error: contactsError } = await supabase
         .from('client_contacts')
-        .insert(contactsToInsert)
+        .insert(contactsToInsert);
 
       if (contactsError) {
-        console.error('Error adding contacts:', contactsError)
+        // Improved error logging
+        console.error('Error adding contacts:', contactsError);
+        alert(
+          'Failed to add contacts.\n' +
+          (contactsError.message ? `Message: ${contactsError.message}\n` : '') +
+          (contactsError.details ? `Details: ${contactsError.details}\n` : '') +
+          (contactsError.hint ? `Hint: ${contactsError.hint}\n` : '') +
+          `Full error: ${JSON.stringify(contactsError, null, 2)}`
+        );
       }
     }
 

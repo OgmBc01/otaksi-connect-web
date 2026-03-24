@@ -216,6 +216,16 @@ export default function EngagementsPage() {
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs font-mono text-admin-muted">{engagement.engagement_code}</span>
                         {getStatusBadge(engagement.status)}
+                        <Link
+                          href={`/dashboard/engagements/${engagement.id}/edit`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="p-2 rounded-lg border border-[#5B6CFF] bg-white text-midnight hover:bg-[#F3F4F6] transition-colors opacity-0 group-hover:opacity-100"
+                          aria-label="Edit Engagement"
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                          </svg>
+                        </Link>
                       </div>
                       <h3 className="text-xl font-bold text-midnight group-hover:gradient-text transition-all duration-300">
                         {engagement.project_name}
