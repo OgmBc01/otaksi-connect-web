@@ -89,11 +89,11 @@ export default function DashboardPage() {
         transition={{ duration: 0.6 }}
         className="mb-8"
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-shadow-slate-950" style={{ fontFamily: 'var(--font-clash)' }}>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900" style={{ fontFamily: 'var(--font-clash)' }}>
           Dashboard
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Overview</span>
         </h1>
-        <p className="text-gray-400">Welcome back! Here's what's happening with your content.</p>
+        <p className="text-gray-900 font-semibold">Welcome back! Here’s what’s happening with your content.</p>
       </motion.div>
 
       {/* Stats Grid */}

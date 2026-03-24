@@ -136,7 +136,7 @@ export default function EngagementsPage() {
               Engagements
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Management</span>
             </h1>
-            <p className="text-admin-muted">Manage client projects and assignments</p>
+            <p className="text-gray-900 font-semibold">Manage client projects and assignments</p>
           </div>
           <Link
             href="/dashboard/engagements/new"

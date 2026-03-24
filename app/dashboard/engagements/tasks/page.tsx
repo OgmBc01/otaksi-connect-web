@@ -212,7 +212,7 @@ export default function TasksPage() {
                 Engagement
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"> Tasks</span>
               </h1>
-              <p className="text-admin-muted">Track and manage all tasks across engagements</p>
+              <p className="text-gray-900 font-semibold">Track and manage all tasks across engagements</p>
             </div>
           </div>
 

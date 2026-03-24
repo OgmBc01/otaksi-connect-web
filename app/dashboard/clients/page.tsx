@@ -37,20 +37,48 @@ export default function ClientsPage() {
   const fetchClients = async () => {
     setLoading(true)
 
-    const { data, error } = await supabase
+    // Fetch all clients
+    const { data: clientsData, error } = await supabase
       .from('clients')
-      .select(`
-        *,
-        contacts:client_contacts(count),
-        engagements:engagements(count)
-      `)
+      .select('*')
       .order('created_at', { ascending: false })
 
-    if (error) {
+    if (error || !clientsData) {
       console.error('Error fetching clients:', error)
-    } else {
-      setClients(data || [])
+      setLoading(false)
+      return
     }
+
+    // Fetch all contacts and aggregate counts by client_id
+    const { data: allContacts } = await supabase
+      .from('client_contacts')
+      .select('id,client_id')
+
+    const contactsMap: Record<string, number> = {}
+    for (const c of allContacts || []) {
+      if (!contactsMap[c.client_id]) contactsMap[c.client_id] = 0
+      contactsMap[c.client_id]++
+    }
+
+    // Fetch all engagements and aggregate counts by client_id
+    const { data: allEngagements } = await supabase
+      .from('engagements')
+      .select('id,client_id')
+
+    const engagementsMap: Record<string, number> = {}
+    for (const e of allEngagements || []) {
+      if (!engagementsMap[e.client_id]) engagementsMap[e.client_id] = 0
+      engagementsMap[e.client_id]++
+    }
+
+    // Merge counts into clients
+    const mergedClients = clientsData.map((client: any) => ({
+      ...client,
+      contacts: { count: contactsMap[client.id] || 0 },
+      engagements: { count: engagementsMap[client.id] || 0 },
+    }))
+
+    setClients(mergedClients)
     setLoading(false)
   }
 

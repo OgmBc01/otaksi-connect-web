@@ -93,6 +93,11 @@ export default function EditClientPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    // Check for at least one primary contact
+    if (!contacts.some(c => c.is_primary)) {
+      alert('Please check the "Is Primary" checkbox for at least one contact. Every client must have a primary contact.');
+      return;
+    }
     setSaving(true)
 
     // Update client
@@ -117,7 +122,7 @@ export default function EditClientPage() {
 
     // Then insert updated contacts
     if (contacts.length > 0) {
-      const contactsToInsert = contacts.map(contact => ({
+      const contactsToInsert = contacts.map(({ id, ...contact }) => ({
         client_id: clientId,
         ...contact,
       }))
