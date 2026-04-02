@@ -9,7 +9,7 @@ const allCaseStudies = [
   {
     id: 1,
     title: 'Digital Banking Platform',
-    client: 'Gulf Financial',
+    client: 'Finexa Bank',
     industry: 'FinTech',
     icon: '💰',
     results: '45% digital adoption',
@@ -19,7 +19,7 @@ const allCaseStudies = [
   {
     id: 2,
     title: 'Payment Gateway Integration',
-    client: 'Gulf Pay',
+    client: 'Payverse',
     industry: 'FinTech',
     icon: '💳',
     results: '1M+ daily txns',
@@ -41,7 +41,7 @@ const allCaseStudies = [
   {
     id: 4,
     title: 'Electronic Health Records',
-    client: 'Gulf Health System',
+    client: 'Medisys Health',
     industry: 'Healthcare',
     icon: '🏥',
     results: '2M+ patients',
@@ -51,7 +51,7 @@ const allCaseStudies = [
   {
     id: 5,
     title: 'Telemedicine Platform',
-    client: 'Gulf Health System',
+    client: 'Medisys Health',
     industry: 'Healthcare',
     icon: '📹',
     results: '100K+ consultations',
@@ -63,7 +63,7 @@ const allCaseStudies = [
   {
     id: 6,
     title: 'Property Management System',
-    client: 'Dubai Heights Real Estate',
+    client: 'Vertex Estates',
     industry: 'Real Estate',
     icon: '🏢',
     results: '20K+ units',
@@ -73,7 +73,7 @@ const allCaseStudies = [
   {
     id: 7,
     title: 'Smart Building IoT Platform',
-    client: 'Dubai Heights Real Estate',
+    client: 'Vertex Estates',
     industry: 'Real Estate',
     icon: '🏙️',
     results: '35% energy savings',
@@ -85,7 +85,7 @@ const allCaseStudies = [
   {
     id: 8,
     title: 'Fleet Management System',
-    client: 'Gulf Logistics',
+    client: 'LogistiX Solutions',
     industry: 'Logistics',
     icon: '🚛',
     results: '30% fuel savings',
@@ -95,7 +95,7 @@ const allCaseStudies = [
   {
     id: 9,
     title: 'Warehouse Automation',
-    client: 'Gulf Logistics',
+    client: 'LogistiX Solutions',
     industry: 'Logistics',
     icon: '🏭',
     results: '40% throughput increase',
@@ -107,7 +107,7 @@ const allCaseStudies = [
   {
     id: 10,
     title: 'Multi-vendor Marketplace',
-    client: 'Gulf Mart',
+    client: 'OmniMart',
     industry: 'E-commerce',
     icon: '🛍️',
     results: '5,000+ sellers',
@@ -117,7 +117,7 @@ const allCaseStudies = [
   {
     id: 11,
     title: 'Omnichannel Retail Platform',
-    client: 'Gulf Retail Group',
+    client: 'OmniMart',
     industry: 'E-commerce',
     icon: '🏪',
     results: '150% online growth',
@@ -129,7 +129,7 @@ const allCaseStudies = [
   {
     id: 12,
     title: 'Citizen Service Portal',
-    client: 'Dubai Digital Government',
+    client: 'CivicSphere',
     industry: 'Government',
     icon: '👥',
     results: '1.5M+ citizens',
@@ -139,7 +139,7 @@ const allCaseStudies = [
   {
     id: 13,
     title: 'Smart City Platform',
-    client: 'Dubai Digital Government',
+    client: 'CivicSphere',
     industry: 'Government',
     icon: '🏙️',
     results: '50+ services',
@@ -151,7 +151,7 @@ const allCaseStudies = [
   {
     id: 14,
     title: 'Cloud Migration Journey',
-    client: 'Gulf Financial',
+    client: 'Nimbus Capital',
     industry: 'Cloud',
     icon: '☁️',
     results: '40% cost reduction',
@@ -161,7 +161,7 @@ const allCaseStudies = [
   {
     id: 15,
     title: 'DevOps Transformation',
-    client: 'Gulf Tech',
+    client: 'DevCore Solutions',
     industry: 'DevOps',
     icon: '⚙️',
     results: '10x faster deployments',

@@ -9,7 +9,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'AI-Powered Healthcare Diagnosis',
-    client: 'Dubai Health Authority',
+    client: 'Medisys Health',
     description: 'Implemented computer vision system for medical imaging analysis, reducing diagnosis time by 40%.',
     image: '/images/ai-automation/case-study-1.jpg',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
@@ -20,7 +20,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Fraud Detection for Banking',
-    client: 'Emirates NBD',
+    client: 'SecureBank',
     description: 'Real-time ML model detecting fraudulent transactions with 99.9% accuracy, saving millions in potential losses.',
     image: '/images/ai-automation/case-study-2.jpg',
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
@@ -31,7 +31,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'Predictive Maintenance for Logistics',
-    client: 'DP World',
+    client: 'LogistiX Solutions',
     description: 'IoT sensors + ML models predict equipment failures before they occur, reducing downtime by 35%.',
     image: '/images/ai-automation/case-study-3.jpg',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
@@ -42,7 +42,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'Personalized Recommendation Engine',
-    client: 'Majid Al Futtaim',
+    client: 'OmniMart',
     description: 'AI-powered product recommendations increasing cross-sell and customer engagement.',
     image: '/images/ai-automation/case-study-4.jpg',
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',

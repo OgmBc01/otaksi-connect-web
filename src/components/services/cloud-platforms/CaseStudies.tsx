@@ -9,7 +9,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'AWS Migration for Financial Services',
-    client: 'Emirates NBD',
+    client: 'Nimbus Capital', // matches Cloud Migration Journey
     description: 'Migrated 50+ critical banking applications to AWS with zero downtime, achieving 40% cost reduction and enhanced security.',
     image: '/images/cloud-platforms/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -20,35 +20,35 @@ const caseStudies = [
   {
     id: 2,
     title: 'Hybrid Cloud for Logistics Giant',
-    client: 'DP World',
+    client: 'LogistiX Solutions', // best match for logistics
     description: 'Implemented hybrid cloud solution connecting on-premise systems with Azure, enabling real-time tracking across global ports.',
     image: '/images/cloud-platforms/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: 'Real-time tracking, 30% efficiency gain',
     metrics: ['10K+ containers tracked', 'Global deployment', '99.9% availability'],
-    slug: 'cloud-migration-gulf-financial'
+    slug: 'fleet-management-gulf-logistics'
   },
   {
     id: 3,
     title: 'Kubernetes Modernization',
-    client: 'DHA',
+    client: 'Medisys Health', // best match for healthcare
     description: 'Modernized healthcare applications with Kubernetes on GCP, enabling auto-scaling and improved patient data access.',
     image: '/images/cloud-platforms/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
     results: '60% faster deployments, auto-scaling',
     metrics: ['15+ microservices', '2M+ patient records', 'HIPAA compliant'],
-    slug: 'cloud-migration-gulf-financial'
+    slug: 'ehr-gulf-health'
   },
   {
     id: 4,
     title: 'Multi-Cloud Strategy',
-    client: 'Majid Al Futtaim',
+    client: 'OmniMart', // best match for e-commerce
     description: 'Designed and implemented multi-cloud strategy across AWS and Azure for e-commerce platform handling peak traffic.',
     image: '/images/cloud-platforms/case-study-4.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: '5M+ users served, 200% peak handling',
     metrics: ['Multi-cloud active-active', 'Black Friday ready', '99.99% uptime'],
-    slug: 'cloud-migration-gulf-financial'
+    slug: 'multi-vendor-marketplace'
   }
 ]
 
