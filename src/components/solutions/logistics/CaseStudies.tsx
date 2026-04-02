@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Fleet Management Transformation',
-    client: 'DP World',
+    client: 'LogistiX Solutions',
     description: 'Implemented comprehensive fleet management system for 1,000+ vehicles, optimizing routes and reducing fuel costs.',
     image: '/images/solutions/logistics/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Warehouse Automation',
-    client: 'Aramex',
+    client: 'LogistiX Solutions',
     description: 'Automated warehouse operations with WMS and robotics, increasing throughput by 40%.',
     image: '/images/solutions/logistics/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
