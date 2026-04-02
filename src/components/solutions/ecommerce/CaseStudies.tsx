@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Multi-vendor Marketplace',
-    client: 'Noon',
+    client: 'OmniMart',
     description: 'Scalable marketplace platform serving 1M+ customers with 5,000+ sellers.',
     image: '/images/solutions/ecommerce/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Omnichannel Retail Platform',
-    client: 'Majid Al Futtaim',
+    client: 'OmniMart',
     description: 'Integrated e-commerce platform connecting online stores with physical retail locations.',
     image: '/images/solutions/ecommerce/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
