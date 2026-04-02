@@ -9,7 +9,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Digital Banking Platform',
-    client: 'Emirates NBD',
+    client: 'Gulf Financial',
     description: 'Built a cloud-native microservices platform handling 500K+ daily transactions with 200ms latency.',
     image: '🏦',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
@@ -20,7 +20,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'E-commerce Marketplace',
-    client: 'Majid Al Futtaim',
+    client: 'Gulf Mart',
     description: 'Headless commerce platform handling 5M+ monthly users with real-time inventory sync.',
     image: '🛍️',
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
@@ -31,7 +31,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'Healthcare Portal',
-    client: 'DHA',
+    client: 'Gulf Health System',
     description: 'Unified healthcare platform serving 2M+ patients across 15+ hospitals in Dubai.',
     image: '🏥',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
@@ -42,7 +42,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'Logistics Tracking System',
-    client: 'DP World',
+    client: 'Gulf Logistics',
     description: 'IoT-enabled tracking platform for real-time container monitoring at Jebel Ali port.',
     image: '🚢',
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
