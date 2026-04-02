@@ -27,6 +27,7 @@ const offices = [
 ]
 
 const socialLinks = [
+  { name: 'Facebook', icon: '📘', url: 'https://facebook.com/OtaksiConnect', color: 'from-[#1877F3] to-[#0056b3]' },
   { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/company/otaksi-connect', color: 'from-[#0077B5] to-[#00A0DC]' },
   { name: 'Twitter', icon: '🐦', url: 'https://twitter.com/otaksiconnect', color: 'from-[#1DA1F2] to-[#1A91DA]' },
   { name: 'GitHub', icon: '🐙', url: 'https://github.com/otaksi-connect', color: 'from-[#333] to-[#6e5494]' },
