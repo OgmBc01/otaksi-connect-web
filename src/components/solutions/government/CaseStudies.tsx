@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Dubai Smart City Platform',
-    client: 'Smart Dubai',
+    client: 'CivicSphere',
     description: 'Integrated smart city platform connecting 50+ government services for 3M+ residents.',
     image: '/images/solutions/government/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Citizen Service Portal',
-    client: 'Abu Dhabi Digital Authority',
+    client: 'CivicSphere',
     description: 'Unified digital portal for government services serving 1.5M+ citizens.',
     image: '/images/solutions/government/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
