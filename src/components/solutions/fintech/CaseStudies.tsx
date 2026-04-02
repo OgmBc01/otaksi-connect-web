@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Digital Banking Transformation',
-    client: 'Emirates NBD',
+    client: 'Finexa Bank',
     description: 'Complete digital banking platform serving 2M+ customers with real-time payments and AI-powered insights.',
     image: '/images/solutions/fintech/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,18 +21,18 @@ const caseStudies = [
   {
     id: 2,
     title: 'Islamic Banking Platform',
-    client: 'Dubai Islamic Bank',
+    client: 'Payverse',
     description: 'Sharia-compliant digital banking solution with profit calculation and Islamic financing modules.',
     image: '/images/solutions/fintech/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
     results: 'AAOIFI compliant, 500K+ users',
     metrics: ['Sharia certified', 'Profit calculation', 'Murabaha financing'],
-    slug: 'digital-banking-gulf-financial'
+    slug: 'payment-gateway-gulf-pay'
   },
   {
     id: 3,
     title: 'Payment Gateway Solution',
-    client: 'Network International',
+    client: 'Payverse',
     description: 'Enterprise payment gateway processing 1M+ daily transactions with multi-currency support.',
     image: '/images/solutions/fintech/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -43,7 +43,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'RegTech Compliance Suite',
-    client: 'ADCB',
+    client: 'SecureBank',
     description: 'Automated AML and KYC compliance platform reducing manual review time by 70%.',
     image: '/images/solutions/fintech/case-study-4.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
