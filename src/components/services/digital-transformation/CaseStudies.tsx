@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Retail Digital Transformation',
-    client: 'Majid Al Futtaim',
+    client: 'OmniMart',
     description: 'End-to-end digital transformation across 50+ retail locations, integrating e-commerce, CRM, and supply chain.',
     image: '/images/digital-transformation/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Banking Process Automation',
-    client: 'Emirates NBD',
+    client: 'SecureBank',
     description: 'Automated 50+ manual processes across retail and corporate banking, reducing processing time by 70%.',
     image: '/images/digital-transformation/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
@@ -32,7 +32,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'Healthcare Digital Maturity',
-    client: 'DHA',
+    client: 'Medisys Health',
     description: 'Comprehensive digital transformation across 15 hospitals, improving patient experience and operational efficiency.',
     image: '/images/digital-transformation/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -43,7 +43,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'Logistics Digital Strategy',
-    client: 'DP World',
+    client: 'LogistiX Solutions',
     description: 'Developed and executed digital strategy transforming port operations with IoT, AI, and automation.',
     image: '/images/digital-transformation/case-study-4.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
