@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'EHR Implementation',
-    client: 'Dubai Health Authority',
+    client: 'Medisys Health',
     description: 'Enterprise-wide EHR system implementation across 15 hospitals, serving 2M+ patients.',
     image: '/images/solutions/healthcare/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Telemedicine Platform',
-    client: 'Mediclinic Middle East',
+    client: 'Medisys Health',
     description: 'Secure telemedicine platform enabling 100K+ virtual consultations annually.',
     image: '/images/solutions/healthcare/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
