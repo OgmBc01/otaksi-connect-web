@@ -45,7 +45,7 @@ export default function DigitalBankingGulfFinancialPage() {
         size: 16 + Math.random() * 20,
         speedX: (Math.random() - 0.5) * 0.15,
         speedY: (Math.random() - 0.5) * 0.1,
-        opacity: 0.16 + Math.random() * 0.18, // Increased opacity for better visibility
+        opacity: 0.16 + Math.random() * 0.18,
       })
     }
 
@@ -159,20 +159,23 @@ export default function DigitalBankingGulfFinancialPage() {
   ]
 
   return (
-    <main className="bg-midnight">
-      {/* Floating Background Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40"
-      />
+    <main className="relative bg-midnight overflow-x-hidden overflow-hidden">
+      {/* Floating Background Canvas - Absolute positioning inside main */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          className="w-full h-full"
+          style={{ opacity: 0.4 }}
+        />
+      </div>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-32">
+      {/* Hero Section - Removed min-height and adjusted padding */}
+      <section className="relative z-10 flex items-center justify-center pt-20 pb-12 lg:pt-28 lg:pb-16">
         {/* Gradient Orbs */}
         <div className="absolute top-40 left-20 w-96 h-96 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" />
         <div className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-[#5B6CFF] to-[#FF2E9F] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow animation-delay-2000" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Breadcrumb */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -246,11 +249,12 @@ export default function DigitalBankingGulfFinancialPage() {
         </div>
       </section>
 
+      {/* Rest of the sections remain the same */}
       {/* Challenge Section */}
-      <section className="relative py-24 bg-midnight">
+      <section className="relative z-10 py-24 bg-midnight">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -304,10 +308,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Solution Section */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -362,10 +366,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Process Timeline */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -393,7 +397,6 @@ export default function DigitalBankingGulfFinancialPage() {
                 onMouseEnter={() => setActiveProcess(index)}
               >
                 <div className="relative h-full">
-                  {/* Glow Effect */}
                   <div 
                     className={`absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500 ${
                       activeProcess === index ? 'opacity-30' : ''
@@ -424,10 +427,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Technologies Section */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -478,10 +481,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Results Section */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -535,10 +538,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -564,10 +567,10 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* Related Case Studies */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-24 bg-midnight border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-glow" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -606,14 +609,14 @@ export default function DigitalBankingGulfFinancialPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative z-10 py-16 md:py-20 bg-midnight border-t border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow" />
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square">
+        {/* Restrict background orb to not overflow viewport */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[60vw] max-h-[600px] pointer-events-none overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl opacity-20 animate-pulse-slow" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

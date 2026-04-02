@@ -29,7 +29,6 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
-  max-height: 100vh;
 }
 /* --- ADMIN STYLES (appended for dashboard, posts, categories, tags, etc.) --- */
 .admin-mesh-bg {

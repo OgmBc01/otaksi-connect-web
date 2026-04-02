@@ -810,13 +810,12 @@ export default function CloudMigrationGulfFinancialPage() {
       </section>
 
       {/* CTA Section - Blurred Glass Card */}
-      <section className="relative py-24 bg-midnight border-t border-white/5">
+      <section className="relative py-16 md:py-20 bg-midnight border-t border-white/5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-glow" />
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square">
+        {/* Restrict background orb to not overflow viewport */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[60vw] max-h-[600px] pointer-events-none overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full blur-3xl opacity-20 animate-pulse-slow" />
         </div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
