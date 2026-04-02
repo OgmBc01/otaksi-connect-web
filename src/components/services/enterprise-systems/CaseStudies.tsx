@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'ERP Transformation for Retail Giant',
-    client: 'Majid Al Futtaim',
+    client: 'Vertex Estates',
     description: 'Implemented SAP S/4HANA across 50+ retail locations, unifying finance, supply chain, and HR operations.',
     image: '/images/enterprise-systems/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'CRM Implementation for Banking',
-    client: 'Emirates NBD',
+    client: 'Finexa Bank',
     description: 'Deployed Salesforce CRM to manage 2M+ customer relationships, improving sales and service delivery.',
     image: '/images/enterprise-systems/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
@@ -32,7 +32,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'HCM Modernization for Healthcare',
-    client: 'DHA',
+    client: 'Medisys Health',
     description: 'Implemented Oracle HCM Cloud for 15,000+ healthcare workers, streamlining HR and payroll processes.',
     image: '/images/enterprise-systems/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -43,7 +43,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'SCM Optimization for Logistics',
-    client: 'DP World',
+    client: 'LogistiX Solutions',
     description: 'End-to-end supply chain management system integrating ports, warehouses, and transportation networks.',
     image: '/images/enterprise-systems/case-study-4.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
