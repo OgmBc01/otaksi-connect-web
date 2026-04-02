@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'CI/CD Transformation for Banking',
-    client: 'Emirates NBD',
+    client: 'DevCore Solutions',
     description: 'Implemented automated CI/CD pipelines reducing deployment time from days to minutes.',
     image: '/images/devops-sre/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Kubernetes Migration for Logistics',
-    client: 'DP World',
+    client: 'LogistiX Solutions',
     description: 'Migrated 100+ applications to Kubernetes, enabling auto-scaling and improved resilience.',
     image: '/images/devops-sre/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
@@ -32,7 +32,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'Observability Platform for Healthcare',
-    client: 'DHA',
+    client: 'Medisys Health',
     description: 'Deployed comprehensive monitoring and observability stack across critical healthcare systems.',
     image: '/images/devops-sre/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -43,7 +43,7 @@ const caseStudies = [
   {
     id: 4,
     title: 'Infrastructure as Code for Retail',
-    client: 'Majid Al Futtaim',
+    client: 'OmniMart',
     description: 'Implemented Infrastructure as Code across 200+ AWS resources, enabling version-controlled infrastructure.',
     image: '/images/devops-sre/case-study-4.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
