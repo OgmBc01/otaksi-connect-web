@@ -10,7 +10,7 @@ const caseStudies = [
   {
     id: 1,
     title: 'Smart Building Platform',
-    client: 'Emaar Properties',
+    client: 'Vertex Estates',
     description: 'IoT-enabled building management system for 50+ luxury residential towers in Dubai.',
     image: '/images/solutions/real-estate/case-study-1.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
@@ -21,7 +21,7 @@ const caseStudies = [
   {
     id: 2,
     title: 'Property Management Portal',
-    client: 'Dubai Properties',
+    client: 'Vertex Estates',
     description: 'Comprehensive property management platform for 20,000+ residential units.',
     image: '/images/solutions/real-estate/case-study-2.jpg',
     gradient: 'linear-gradient(135deg, #5B6CFF 0%, #FF2E9F 100%)',
@@ -32,7 +32,7 @@ const caseStudies = [
   {
     id: 3,
     title: 'Real Estate Marketplace',
-    client: 'Property Finder',
+    client: 'OmniMart',
     description: 'Advanced property listing platform with AI-powered search and virtual tours.',
     image: '/images/solutions/real-estate/case-study-3.jpg',
     gradient: 'linear-gradient(135deg, #FF2E9F 0%, #5B6CFF 100%)',
