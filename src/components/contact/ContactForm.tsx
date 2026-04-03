@@ -23,6 +23,7 @@ export default function ContactForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -36,6 +37,10 @@ export default function ContactForm() {
         ...errors,
         [e.target.name]: '',
       })
+    }
+    // Clear submit error when user starts typing
+    if (submitError) {
+      setSubmitError(null)
     }
   }
 
@@ -67,26 +72,44 @@ export default function ContactForm() {
     }
 
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Reset form after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        service: '',
-        message: '',
-        location: 'dubai',
+    setSubmitError(null)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-    }, 5000)
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form')
+      }
+
+      setIsSubmitted(true)
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          service: '',
+          message: '',
+          location: 'dubai',
+        })
+      }, 5000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const services = [
@@ -143,7 +166,7 @@ export default function ContactForm() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-clash)' }}>
             Send Us a{' '}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF]">Message</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Message</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Have a question or ready to start a project? Fill out the form below and we'll get back to you within 24 hours.
@@ -166,8 +189,8 @@ export default function ContactForm() {
                 className="text-center py-12"
               >
                 <div className="relative w-24 h-24 mx-auto mb-6">
-                  <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full animate-ping opacity-30" />
-                  <div className="relative w-24 h-24 rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-full animate-ping opacity-30" />
+                  <div className="relative w-24 h-24 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
                     <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -180,6 +203,17 @@ export default function ContactForm() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Error Alert */}
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg"
+                  >
+                    <p className="text-red-400 text-sm text-center">{submitError}</p>
+                  </motion.div>
+                )}
+
                 {/* Name & Email Row */}
                 <div className="grid md:grid-cols-2 gap-6">
                   <motion.div variants={itemVariants}>

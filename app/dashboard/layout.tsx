@@ -75,6 +75,13 @@ const menuItems = [
       { name: 'Add Employee', href: '/dashboard/employees/new', icon: '➕' },
     ],
   },
+  // Contact Submission
+  {
+    name: 'Contact Submissions',
+    href: '/dashboard/contact-submissions',
+    icon: '📨',
+    gradient: 'from-[#FF2E9F] to-[#5B6CFF]'
+  },
   {
     name: 'Profile',
     href: '/dashboard/profile',
@@ -171,7 +178,7 @@ export default function DashboardLayout({
               {/* Toggle Button */}
               <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="absolute -right-3 top-10 w-6 h-6 rounded-full bg-midnight border border-white/10 flex items-center justify-center hover:border-white/20 transition-colors"
+                className="absolute -right-1 top-10 w-6 h-6 rounded-full bg-midnight border border-white/10 flex items-center justify-center hover:border-white/20 transition-colors"
               >
                 <svg className={`w-3 h-3 text-gray-400 transform transition-transform ${isCollapsed ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
