@@ -118,9 +118,9 @@ export default function TermsPage() {
             For any questions about these Terms, please contact us:
           </p>
           <ul>
-            <li><strong>Email:</strong> legal@otaksi.ae</li>
-            <li><strong>Dubai Office:</strong> +971 4 123 4567</li>
-            <li><strong>Address:</strong> Dubai Internet City, Building 1, Office 205, Dubai, UAE</li>
+            <li><strong>Email:</strong> otaksiconnect.com</li>
+            <li><strong>Dubai Office:</strong> +971 58 255 1785</li>
+            <li><strong>Address:</strong> Compass Building, Al Shohada Road, Al Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates</li>
           </ul>
         </div>
       </div>

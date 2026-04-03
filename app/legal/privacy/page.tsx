@@ -138,10 +138,10 @@ export default function PrivacyPage() {
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <ul className="list-disc pl-6 mb-4 text-gray-700">
-            <li><strong className="text-gray-800">Dubai Office:</strong> +971 4 123 4567</li>
-            <li><strong className="text-gray-800">Lagos Office:</strong> +234 1 234 5678</li>
-            <li><strong className="text-gray-800">Email:</strong> privacy@otaksi.ae</li>
-            <li><strong className="text-gray-800">Address:</strong> Dubai Internet City, Building 1, Office 205, Dubai, UAE</li>
+            <li><strong className="text-gray-800">Dubai Office:</strong> +971 58 255 1785</li>
+            <li><strong className="text-gray-800">Lagos Office:</strong> +234 905 208 7781</li>
+            <li><strong className="text-gray-800">Email:</strong> privacy@otaksiconnect.com</li>
+            <li><strong className="text-gray-800">Address:</strong>Compass Building, Al Shohada Road, Al Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates</li>
           </ul>
         </div>
       </div>

@@ -116,9 +116,9 @@ export default function CookiesPage() {
               If you have any questions about our use of cookies or this Cookie Policy, please contact us:
             </p>
             <ul>
-              <li><strong>Email:</strong> privacy@otaksi.ae</li>
-              <li><strong>Dubai Office:</strong> +971 4 123 4567</li>
-              <li><strong>Lagos Office:</strong> +234 1 234 5678</li>
+              <li><strong>Email:</strong> privacy@otaksiconnect.com</li>
+              <li><strong>Dubai Office:</strong> +971 58 255 1785</li>
+              <li><strong>Lagos Office:</strong> +234 905 208 7781 </li>
             </ul>
           </div>
         </div>

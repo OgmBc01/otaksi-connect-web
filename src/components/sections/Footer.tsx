@@ -99,9 +99,9 @@ const socialLinks = [
 ]
 
 const contactInfo = [
-  { icon: '📍', text: 'Dubai Internet City, Building 1, Office 205, Dubai, UAE' },
-  { icon: '📞', text: '+971 4 123 4567' },
-  { icon: '✉️', text: 'hello@otaksi.ae' },
+  { icon: '📍', text: 'Compass Building, Al Shohada Road, Al Hamra Industrial Zone-FZ, Ras Al Khaimah, United Arab Emirates.' },
+  { icon: '📞', text: '+971 58 255 1785' },
+  { icon: '✉️', text: 'info@otaksiconnect.com' },
 ]
 
 export default function Footer() {
@@ -320,27 +320,27 @@ export default function Footer() {
               © {currentYear} Otaksi Connect. All rights reserved.
             </p>
 
-{/* Legal Links - Replace the existing legal links section */}
-<div className="flex gap-6">
-  <Link
-    href="/legal/privacy"
-    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
-  >
-    Privacy Policy
-  </Link>
-  <Link
-    href="/legal/terms"
-    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
-  >
-    Terms of Service
-  </Link>
-  <Link
-    href="/legal/cookies"
-    className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
-  >
-    Cookie Policy
-  </Link>
-</div>
+            {/* Legal Links - Replace the existing legal links section */}
+            <div className="flex gap-6">
+              <Link
+                href="/legal/privacy"
+                className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/legal/terms"
+                className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+              >
+                Terms of Service
+              </Link>
+              <Link
+                href="/legal/cookies"
+                className="text-xs text-gray-500 hover:text-white transition-colors duration-300"
+              >
+                Cookie Policy
+              </Link>
+            </div>
 
             {/* UAE Flag Indicator */}
             {/* <div className="flex items-center gap-2">
