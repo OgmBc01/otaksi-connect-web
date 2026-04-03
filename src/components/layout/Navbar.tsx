@@ -31,7 +31,6 @@ const navLinks = [
       { name: 'Smart Government', href: '/solutions/government', description: 'Digital citizen services' },
     ]
   },
-  { name: 'Industries', href: '/industries' },
   { name: 'Case Studies', href: '/case-studies' },
   { name: 'Insights', href: '/insights' },
   { name: 'Contact', href: '/contact' },

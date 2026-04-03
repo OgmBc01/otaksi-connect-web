@@ -149,7 +149,7 @@ export default function LinkCategoriesPage() {
   const popularIcons = ['🔗', '📱', '💼', '🎯', '📚', '🎨', '💡', '🚀', '⭐', '❤️', '👍', '🎉', '🔧', '📊', '🛠️']
 
   return (
-    <div className="relative p-8 min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="relative p-8 min-h-screen">
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex flex-col md:flex-row items-start md:items-center justify-between">
