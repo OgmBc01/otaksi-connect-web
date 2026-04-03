@@ -57,7 +57,7 @@ export default function LoginPage() {
               </div>
             </div>
             <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
-              Admin Login
+              <span style={{ color: '#1A1333', fontFamily: 'var(--font-clash)' }}>Admin Login</span>
             </h1>
             <p className="text-sm text-gray-500">Sign in to access the dashboard</p>
           </div>

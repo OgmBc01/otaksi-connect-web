@@ -38,6 +38,31 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+    // Track scroll direction for hide/show navbar
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+      let ticking = false;
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (currentScrollY > lastScrollY && currentScrollY > 40) {
+              setShowNavbar(false); // scrolling down
+            } else {
+              setShowNavbar(true); // scrolling up
+            }
+            setLastScrollY(currentScrollY);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [lastScrollY]);
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -91,21 +116,23 @@ export default function Navbar() {
       {/* Desktop Navigation */}
       <motion.nav
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ y: showNavbar ? 0 : -120 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 40 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarHeight} bg-transparent mt-4 mx-4`}
         style={{}}
       >
-        {/* Glassy blurred background for desktop */}
+        {/* Glassy blurred background for desktop (light) */}
         <div
           className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none"
           aria-hidden="true"
         >
-          <div className="w-full h-full bg-white/10 backdrop-blur-xl border border-white/20 mx-auto px-0"
+          {/* Dark glass effect for large screens */}
+          <div
+            className="w-full h-full bg-black/85 backdrop-blur-xl shadow-2xl border border-white/10 mx-auto px-0"
             style={{
               maxWidth: '1440px',
               margin: '0 auto',
-              borderRadius: '50px/50px', // semi-circle top/bottom at ends
+              borderRadius: '50px/50px',
             }}
           />
         </div>
@@ -135,7 +162,7 @@ export default function Navbar() {
                       className={`px-2 py-1 text-xs font-medium rounded-lg transition-all duration-300 ${
                         pathname.startsWith(link.href)
                           ? 'gradient-text'
-                          : 'text-gray-300 hover:text-white'
+                          : 'text-neutral-100 hover:gradient-text'
                       }`}
                     >
                       {link.name}
@@ -186,7 +213,7 @@ export default function Navbar() {
                       className={`px-2 py-1 text-xs font-medium rounded-lg transition-all duration-300 ${
                         pathname === link.href
                           ? 'gradient-text'
-                          : 'text-gray-300 hover:text-white'
+                          : 'text-neutral-100 hover:gradient-text'
                       }`}
                   >
                     {link.name}
@@ -198,10 +225,10 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <Link
-              href="/contact"
+              href="/dashboard/login"
               className="px-3 py-1 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-xs font-medium text-white hover:opacity-90 transition-opacity"
             >
-              Start a Project
+              Login
             </Link>
           </div>
           {/* Mobile Logo, Brand, Toggle on shared glassy background */}
@@ -261,7 +288,7 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
               className="absolute inset-0 flex items-center justify-center p-6"
             >
-              <div className="w-full max-w-md glass-card rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl overflow-hidden max-h-[80vh] overflow-y-auto mobile-menu-scroll-hide mt-1">
+              <div className="w-full max-w-md glass-card rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl overflow-hidden max-h-[80vh] overflow-y-auto mobile-menu-scroll-hide scrollbar-hide mt-1">
                 <div className="p-6 space-y-4">
                   {navLinks.map((link) => (
                     <div key={link.name} className="space-y-2">
