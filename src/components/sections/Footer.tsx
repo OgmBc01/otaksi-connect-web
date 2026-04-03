@@ -31,6 +31,7 @@ const resourcesLinks = [
   { name: 'Case Studies', href: '/case-studies' },
   { name: 'Technology Stack', href: '/technology' },
   { name: 'Documentation', href: '/docs' },
+  { name: 'Links Hub', href: '/links' },
   { name: 'Support', href: '/support' },
 ]
 

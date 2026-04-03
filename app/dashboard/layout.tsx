@@ -75,6 +75,17 @@ const menuItems = [
       { name: 'Add Employee', href: '/dashboard/employees/new', icon: '➕' },
     ],
   },
+  // Links
+  {
+    name: 'Links Hub',
+    href: '/dashboard/links',
+    icon: '🔗',
+    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
+    children: [
+      { name: 'All Links', href: '/dashboard/links', icon: '📋' },
+      { name: 'Categories', href: '/dashboard/links/categories', icon: '📂' },
+    ],
+  },
   // Contact Submission
   {
     name: 'Contact Submissions',
