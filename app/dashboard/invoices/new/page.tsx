@@ -1,5 +1,7 @@
 'use client'
 
+
+import { Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -32,7 +34,7 @@ type LineItem = {
   discount_rate: number
 }
 
-export default function NewInvoicePage() {
+function NewInvoicePageInner() {
   const searchParams = useSearchParams()
   const preselectedClient = searchParams.get('client')
   const preselectedEngagement = searchParams.get('engagement')
@@ -495,5 +497,13 @@ export default function NewInvoicePage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function NewInvoicePage() {
+  return (
+    <Suspense>
+      <NewInvoicePageInner />
+    </Suspense>
   )
 }

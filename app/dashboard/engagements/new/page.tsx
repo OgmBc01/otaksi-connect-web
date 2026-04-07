@@ -36,7 +36,9 @@ type PaymentTerms = 'full' | 'half' | 'quarterly' | 'monthly' | 'milestone'
 type BillingCycle = 'one-time' | 'monthly' | 'quarterly' | 'yearly'
 type EngagementStatus = 'draft' | 'active' | 'on-hold' | 'completed' | 'cancelled'
 
-export default function NewEngagementPage() {
+import { Suspense } from 'react'
+
+function NewEngagementPageInner() {
   const searchParams = useSearchParams()
   const preselectedClient = searchParams.get('client')
   
@@ -605,5 +607,13 @@ export default function NewEngagementPage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function NewEngagementPage() {
+  return (
+    <Suspense>
+      <NewEngagementPageInner />
+    </Suspense>
   )
 }

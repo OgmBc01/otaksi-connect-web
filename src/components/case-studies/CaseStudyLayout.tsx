@@ -3,10 +3,32 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ReactNode } from 'react'
 import Button from '@/components/ui/Button'
 
-export default function MultiVendorMarketplacePage() {
+interface CaseStudyLayoutProps {
+  children: ReactNode;
+  title: string;
+  client: string;
+  industry: string;
+  gradient: string;
+  icon: string;
+  technologies: string[];
+  metrics: string[];
+  results: string;
+}
+
+export default function CaseStudyLayout({
+  children,
+  title,
+  client,
+  industry,
+  gradient,
+  icon,
+  technologies,
+  metrics,
+  results,
+}: CaseStudyLayoutProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [activeProcess, setActiveProcess] = useState(0)
 
@@ -186,12 +208,7 @@ export default function MultiVendorMarketplacePage() {
     }
   }, [])
 
-  const metrics = [
-    { value: '5,000+', label: 'Active Sellers' },
-    { value: '1M+', label: 'Products' },
-    { value: '500K+', label: 'Monthly Orders' },
-    { value: '4.8★', label: 'Seller Rating' },
-  ]
+  // Removed duplicate metrics declaration; using metrics from props
 
   const processSteps = [
     {
@@ -224,16 +241,7 @@ export default function MultiVendorMarketplacePage() {
     },
   ]
 
-  const technologies = [
-    { name: 'Next.js', level: 95, description: 'Frontend platform' },
-    { name: 'Node.js', level: 92, description: 'Marketplace API' },
-    { name: 'PostgreSQL', level: 90, description: 'Product catalog' },
-    { name: 'Redis', level: 88, description: 'Session cache' },
-    { name: 'Elasticsearch', level: 92, description: 'Product search' },
-    { name: 'Stripe Connect', level: 95, description: 'Seller payments' },
-    { name: 'Kafka', level: 85, description: 'Order processing' },
-    { name: 'AWS', level: 90, description: 'Cloud infrastructure' },
-  ]
+  // Removed duplicate technologies declaration; using technologies from props
 
   return (
     <main className="bg-midnight">
@@ -579,19 +587,7 @@ export default function MultiVendorMarketplacePage() {
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500" />
                   <div className="relative backdrop-blur-lg bg-white/5 rounded-xl border border-white/10 group-hover:border-white/20 p-4 transition-all">
                     <div className="flex justify-between items-center mb-2">
-                      <div>
-                        <span className="text-sm font-medium text-white">{tech.name}</span>
-                        <p className="text-xs text-gray-500">{tech.description}</p>
-                      </div>
-                      <span className="text-sm font-bold gradient-text">{tech.level}%</span>
-                    </div>
-                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${tech.level}%` }}
-                        transition={{ duration: 1, delay: 0.2 }}
-                        className="h-full rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"
-                      />
+                      <span className="text-sm font-medium text-white">{tech}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -634,8 +630,7 @@ export default function MultiVendorMarketplacePage() {
                 >
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-500" />
                   <div className="relative backdrop-blur-lg bg-white/5 rounded-2xl border border-white/10 group-hover:border-white/20 p-6 text-center transition-all">
-                    <div className="text-3xl font-bold gradient-text mb-2">{metric.value}</div>
-                    <div className="text-sm text-gray-500">{metric.label}</div>
+                    <div className="text-3xl font-bold gradient-text mb-2">{metric}</div>
                   </div>
                 </motion.div>
               ))}
