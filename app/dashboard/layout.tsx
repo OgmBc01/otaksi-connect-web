@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
 const menuItems = [
@@ -112,22 +113,43 @@ export default function DashboardLayout({
   const [user, setUser] = useState<any>(null)
   const supabase = createClient()
 
+  const router = useRouter();
   useEffect(() => {
+    let ignore = false;
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // Get author details
         const { data: author } = await supabase
           .from('authors')
           .select('*')
           .eq('id', user.id)
-          .single()
-        
-        setUser({ ...user, ...author })
+          .single();
+        if (!ignore) setUser({ ...user, ...author });
+      } else {
+        if (!ignore) setUser(null);
       }
-    }
-    getUser()
-  }, [supabase])
+    };
+    getUser();
+    // Listen for auth changes (login/logout in other tabs)
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        supabase
+          .from('authors')
+          .select('*')
+          .eq('id', session.user.id)
+          .single()
+          .then(({ data: author }) => {
+            setUser({ ...session.user, ...author });
+          });
+      } else {
+        setUser(null);
+      }
+    });
+    return () => {
+      ignore = true;
+      listener?.subscription.unsubscribe();
+    };
+  }, [supabase]);
 
   // Auto-expand dropdown if a child is active
   useEffect(() => {
@@ -333,6 +355,18 @@ export default function DashboardLayout({
                     </div>
                   )}
                 </div>
+                {!isCollapsed && (
+                  <button
+                    onClick={async () => {
+                      await supabase.auth.signOut();
+                      setUser(null);
+                      router.push('/');
+                    }}
+                    className="mt-6 w-full py-2 rounded-lg bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] text-white font-semibold text-sm hover:opacity-90 transition-opacity shadow"
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             )}
           </div>

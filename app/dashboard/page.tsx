@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 
@@ -13,6 +14,7 @@ const statCards = [
 ]
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [stats, setStats] = useState({
     posts: 0,
     categories: 0,
@@ -55,7 +57,15 @@ export default function DashboardPage() {
     }
 
     fetchStats()
-  }, [supabase])
+
+    // Listen for auth changes (logout in other tabs)
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        router.replace('/dashboard/login');
+      }
+    });
+    return () => { listener?.subscription.unsubscribe(); };
+  }, [supabase, router])
 
   const containerVariants = {
     hidden: { opacity: 0 },
