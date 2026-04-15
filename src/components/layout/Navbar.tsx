@@ -1,6 +1,9 @@
 'use client'
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
+import { useAutoLogout } from '@/hooks/useAutoLogout';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -37,6 +40,37 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+  const supabase = createClient();
+      // Fetch user session on mount
+      useEffect(() => {
+        const getSession = async () => {
+          const { data: { session } } = await supabase.auth.getSession();
+          setUser(session?.user || null);
+        };
+        getSession();
+        // Listen for auth changes
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+          setUser(session?.user || null);
+        });
+        return () => { listener?.subscription.unsubscribe(); };
+      }, []);
+
+      // Auto logout after 60 min inactivity
+      useAutoLogout(async () => {
+        if (user) {
+          await supabase.auth.signOut();
+          setUser(null);
+          router.push('/');
+        }
+      }, 60 * 60 * 1000);
+
+      const handleLogout = async () => {
+        await supabase.auth.signOut();
+        setUser(null);
+        router.push('/');
+      };
     // Track scroll direction for hide/show navbar
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -223,12 +257,21 @@ export default function Navbar() {
           </div>
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link
-              href="/dashboard/login"
-              className="px-3 py-1 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-xs font-medium text-white hover:opacity-90 transition-opacity"
-            >
-              Login
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-xs font-medium text-white hover:opacity-90 transition-opacity"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/dashboard/login"
+                className="px-3 py-1 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-xs font-medium text-white hover:opacity-90 transition-opacity"
+              >
+                Login
+              </Link>
+            )}
           </div>
           {/* Mobile Logo, Brand, Toggle on shared glassy background */}
           <div className="lg:hidden fixed left-4 right-4 top-4 z-50 flex items-center justify-between bg-transparent backdrop-blur-xl border border-white/20 rounded-full px-3 py-1 mb-3">
@@ -359,13 +402,22 @@ export default function Navbar() {
 
                   {/* Mobile CTA */}
                   <div className="pt-4">
-                    <Link
-                      href="/contact"
-                      className="block w-full py-4 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-center font-medium text-white hover:opacity-90 transition-opacity"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Start a Project
-                    </Link>
+                    {user ? (
+                      <button
+                        onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
+                        className="block w-full py-3 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-center font-medium text-white text-base hover:opacity-90 transition-opacity shadow-lg"
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <Link
+                        href="/dashboard/login"
+                        className="block w-full py-3 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-center font-medium text-white text-base hover:opacity-90 transition-opacity shadow-lg"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Login
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
