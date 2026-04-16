@@ -173,10 +173,12 @@ export default function Navbar() {
           {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg blur-md opacity-50 group-hover:opacity-100 transition-opacity" />
-                <div className={`relative ${logoIconSize} rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center transition-all duration-300`}>
-                  <span className="text-white font-bold text-sm">OC</span>
-                </div>
+                <img
+                  src="/logo.svg"
+                  alt="Otaksi Connect Logo"
+                  className={`object-contain ${logoIconSize} rounded-lg bg-white shadow-md`}
+                  style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+                />
               </div>
               <span className={`font-bold gradient-text transition-all duration-300 ${logoSize}`}>Otaksi Connect</span>
             </Link>
@@ -277,9 +279,12 @@ export default function Navbar() {
           <div className="lg:hidden fixed left-4 right-4 top-4 z-50 flex items-center justify-between bg-transparent backdrop-blur-xl border border-white/20 rounded-full px-3 py-1 mb-3">
             <Link href="/" className="flex items-center gap-2">
               <div className="relative">
-                <div className={`relative ${logoIconSize} rounded-full bg-linear-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center transition-all duration-300`}>
-                  <span className="text-white font-bold text-sm">OC</span>
-                </div>
+                <img
+                  src="/logo.svg"
+                  alt="Otaksi Connect Logo"
+                  className={`object-contain ${logoIconSize} rounded-lg bg-white shadow-md`}
+                  style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+                />
               </div>
               <span className={`font-bold gradient-text transition-all duration-300 ${logoSize}`}>Otaksi Connect</span>
             </Link>

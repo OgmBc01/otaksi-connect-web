@@ -26,6 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body style={{ 
         backgroundColor: '#0B0616', 
         color: '#FFFFFF',

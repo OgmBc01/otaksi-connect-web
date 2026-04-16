@@ -191,10 +191,12 @@ export default function DashboardLayout({
             <div className="p-6 border-b border-white/5">
               <Link href="/dashboard" className="flex items-center gap-3">
                 <div className="relative w-8 h-8">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg blur-md opacity-50" />
-                  <div className="relative w-full h-full rounded-lg bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">OC</span>
-                  </div>
+                  <img
+                    src="/logo.svg"
+                    alt="Otaksi Connect Logo"
+                    className="object-contain w-8 h-8 rounded-lg bg-white shadow-md"
+                    style={{ maxWidth: '2rem', maxHeight: '2rem' }}
+                  />
                 </div>
                 {!isCollapsed && (
                   <motion.span
