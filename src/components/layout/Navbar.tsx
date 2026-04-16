@@ -1,4 +1,3 @@
-'use client'
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -9,7 +8,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { name: 'About', href: '/about' },
+  { 
+    name: 'About',
+    href: '/about'
+  },
   { 
     name: 'Services', 
     href: '/services',
@@ -43,123 +45,111 @@ export default function Navbar() {
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
   const supabase = createClient();
-      // Fetch user session on mount
-      useEffect(() => {
-        const getSession = async () => {
-          const { data: { session } } = await supabase.auth.getSession();
-          setUser(session?.user || null);
-        };
-        getSession();
-        // Listen for auth changes
-        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-          setUser(session?.user || null);
-        });
-        return () => { listener?.subscription.unsubscribe(); };
-      }, []);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+  const lastScrollY = React.useRef(0);
+  const scrollTimeout = React.useRef<NodeJS.Timeout | null>(null);
 
-      // Auto logout after 60 min inactivity
-      useAutoLogout(async () => {
-        if (user) {
-          await supabase.auth.signOut();
-          setUser(null);
-          router.push('/');
-        }
-      }, 60 * 60 * 1000);
-
-      const handleLogout = async () => {
-        await supabase.auth.signOut();
-        setUser(null);
-        router.push('/');
-      };
-    // Track scroll direction for hide/show navbar
-    const [showNavbar, setShowNavbar] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-
-    useEffect(() => {
-      let ticking = false;
-      const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            if (currentScrollY > lastScrollY && currentScrollY > 40) {
-              setShowNavbar(false); // scrolling down
-            } else {
-              setShowNavbar(true); // scrolling up
-            }
-            setLastScrollY(currentScrollY);
-            ticking = false;
-          });
-          ticking = true;
-        }
-      };
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [lastScrollY]);
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isHeroVisible, setIsHeroVisible] = useState(true)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null)
-  const pathname = usePathname()
-
-  // Track scroll position and hero section visibility
   useEffect(() => {
-    const handleScroll = () => {
-      // Update navbar background on scroll
-      setIsScrolled(window.scrollY > 20)
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+    getSession();
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user || null);
+    });
+    return () => { listener?.subscription.unsubscribe(); };
+  }, []);
 
-      // Check if hero section is in view
-      const heroSection = document.getElementById('hero-section')
-      if (heroSection) {
-        const rect = heroSection.getBoundingClientRect()
-        setIsHeroVisible(rect.bottom > 0)
-      }
+  useAutoLogout(async () => {
+    if (user) {
+      await supabase.auth.signOut();
+      setUser(null);
+      router.push('/');
     }
+  }, 60 * 60 * 1000);
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    router.push('/');
+  };
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsMobileMenuOpen(false)
-    setActiveDropdown(null)
-    setMobileDropdown(null)
-  }, [pathname])
-
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      setShowNavbar(true);
+      return;
+    }
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
+        if (currentScrollY > lastScrollY.current && currentScrollY > 40) {
+          setShowNavbar(false);
+        } else {
+          setShowNavbar(true);
+        }
+        lastScrollY.current = currentScrollY;
+      }, 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+      const heroSection = document.getElementById('hero-section');
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        setIsHeroVisible(rect.bottom > 0);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+    setMobileDropdown(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = 'unset';
     }
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isMobileMenuOpen])
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
-  const navbarHeight = isHeroVisible ? 'h-14' : 'h-10'
-  const logoSize = isHeroVisible ? 'text-lg' : 'text-base'
-  const logoIconSize = isHeroVisible ? 'w-8 h-8' : 'w-6 h-6'
+  const navbarHeight = isHeroVisible ? 'h-14' : 'h-10';
+  const logoSize = isHeroVisible ? 'text-lg' : 'text-base';
+  const logoIconSize = isHeroVisible ? 'w-8 h-8' : 'w-6 h-6';
 
   return (
     <>
       {/* Desktop Navigation */}
       <motion.nav
         initial={{ y: -100 }}
-        animate={{ y: showNavbar ? 0 : -120 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarHeight} bg-transparent mt-4 mx-4`}
-        style={{}}
+        animate={{ y: isMobileMenuOpen ? 0 : (showNavbar ? 0 : -120) }}
+        transition={{ type: 'tween', duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navbarHeight} bg-transparent mt-4 mx-4`}
       >
-        {/* Glassy blurred background for desktop (light) */}
-        <div
-          className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none"
-          aria-hidden="true"
-        >
-          {/* Dark glass effect for large screens */}
+        {/* Glassy blurred background for desktop */}
+        <div className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
           <div
             className="w-full h-full bg-black/85 backdrop-blur-xl shadow-2xl border border-white/10 mx-auto px-0"
             style={{
@@ -170,18 +160,22 @@ export default function Navbar() {
           />
         </div>
         <div className="relative h-full max-w-7xl mx-auto px-2 sm:px-3 lg:px-4 flex items-center justify-between">
-          {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative">
-                <img
-                  src="/logo.svg"
-                  alt="Otaksi Connect Logo"
-                  className={`object-contain ${logoIconSize} rounded-lg bg-white shadow-md`}
-                  style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
-                />
-              </div>
-              <span className={`font-bold gradient-text transition-all duration-300 ${logoSize}`}>Otaksi Connect</span>
-            </Link>
+          {/* Logo - Desktop only */}
+          <Link
+            href="/"
+            className="hidden lg:flex items-center gap-2 group"
+          >
+            <div className="relative">
+              <img
+                src="/logo.svg"
+                alt="Otaksi Connect Logo"
+                className={`object-contain ${logoIconSize} rounded-lg bg-white shadow-md`}
+                style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+              />
+            </div>
+            <span className={`font-bold gradient-text transition-all duration-300 ${logoSize}`}>Otaksi Connect</span>
+          </Link>
+
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-0.5">
             {navLinks.map((link) => (
@@ -210,7 +204,6 @@ export default function Navbar() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    {/* Dropdown Menu */}
                     <AnimatePresence>
                       {activeDropdown === link.name && (
                         <motion.div
@@ -224,7 +217,6 @@ export default function Navbar() {
                             {link.dropdown.map((item, idx) => (
                               <React.Fragment key={item.name + '-' + idx}>
                                 <Link
-                                  key={item.name}
                                   href={item.href}
                                   className="block p-3 rounded-none hover:bg-white/20 transition-colors duration-300 group/item"
                                 >
@@ -243,13 +235,13 @@ export default function Navbar() {
                     </AnimatePresence>
                   </>
                 ) : (
-                    <Link
-                      href={link.href}
-                      className={`px-2 py-1 text-xs font-medium rounded-lg transition-all duration-300 ${
-                        pathname === link.href
-                          ? 'gradient-text'
-                          : 'text-neutral-100 hover:gradient-text'
-                      }`}
+                  <Link
+                    href={link.href}
+                    className={`px-2 py-1 text-xs font-medium rounded-lg transition-all duration-300 ${
+                      pathname === link.href
+                        ? 'gradient-text'
+                        : 'text-neutral-100 hover:gradient-text'
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -257,7 +249,8 @@ export default function Navbar() {
               </div>
             ))}
           </div>
-          {/* CTA Button */}
+
+          {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
             {user ? (
               <button
@@ -275,19 +268,22 @@ export default function Navbar() {
               </Link>
             )}
           </div>
-          {/* Mobile Logo, Brand, Toggle on shared glassy background */}
-          <div className="lg:hidden fixed left-4 right-4 top-4 z-50 flex items-center justify-between bg-transparent backdrop-blur-xl border border-white/20 rounded-full px-3 py-1 mb-3">
-            <Link href="/" className="flex items-center gap-2">
+
+          {/* Mobile Menu Button Bar with Logo on Left */}
+          <div className="lg:hidden fixed left-4 right-4 top-4 z-50 flex items-center justify-between bg-black/50 backdrop-blur-xl border border-white/20 rounded-full px-3 py-1 mb-3">
+            {/* Logo on the left side */}
+            <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
               <div className="relative">
                 <img
                   src="/logo.svg"
                   alt="Otaksi Connect Logo"
-                  className={`object-contain ${logoIconSize} rounded-lg bg-white shadow-md`}
-                  style={{ maxWidth: '2.5rem', maxHeight: '2.5rem' }}
+                  className={`object-contain w-8 h-8 rounded-lg bg-white shadow-md`}
                 />
               </div>
-              <span className={`font-bold gradient-text transition-all duration-300 ${logoSize}`}>Otaksi Connect</span>
+              <span className="font-bold gradient-text text-base">Otaksi Connect</span>
             </Link>
+            
+            {/* Hamburger button on the right side */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="relative w-10 h-10 rounded-full bg-transparent flex items-center justify-center z-50"
@@ -336,7 +332,7 @@ export default function Navbar() {
               className="absolute inset-0 flex items-center justify-center p-6"
             >
               <div className="w-full max-w-md glass-card rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl overflow-hidden max-h-[80vh] overflow-y-auto mobile-menu-scroll-hide scrollbar-hide mt-1">
-                <div className="p-6 space-y-4">
+                <div className="p-6 space-y-4 pt-6">
                   {navLinks.map((link) => (
                     <div key={link.name} className="space-y-2">
                       {link.dropdown ? (
@@ -362,7 +358,6 @@ export default function Navbar() {
                             </svg>
                           </button>
 
-                          {/* Mobile Dropdown */}
                           <AnimatePresence>
                             {mobileDropdown === link.name && (
                               <motion.div
@@ -431,5 +426,5 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
