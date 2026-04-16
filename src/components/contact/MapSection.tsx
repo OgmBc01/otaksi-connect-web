@@ -15,9 +15,9 @@ const locations = [
   },
   {
     id: 'lagos',
-    name: 'Lagos Office',
+    name: 'Nigeria Office',
     flag: '🇳🇬',
-    address: 'Victoria Island, Plot 1234, Ahmadu Bello Way',
+    address: 'No: 2 Guru Close, Off Sunday Awoniyi Road, New GRA Bauchi, Nigeria.',
     coordinates: { lat: 6.428, lng: 3.422 },
     gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
   },
@@ -89,72 +89,34 @@ export default function MapSection() {
           <div className="absolute -inset-1 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-3xl opacity-30 blur-2xl" />
           
           <div className="relative backdrop-blur-lg bg-white/5 rounded-3xl border border-white/10 p-8 overflow-hidden">
-            {/* Map Visualization */}
-            <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B0616] to-[#1A0F2E]">
-              {/* Grid Overlay */}
-              <div className="absolute inset-0 opacity-20" style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(91, 108, 255, 0.2) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(255, 46, 159, 0.2) 1px, transparent 1px)
-                `,
-                backgroundSize: '50px 50px'
-              }} />
-
-              {/* Location Marker */}
-              <motion.div
-                key={activeLocation}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", damping: 10 }}
-                className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-              >
-                <div className="relative">
-                  {/* Pulse Ring */}
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.5, 0, 0.5],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                    }}
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]"
-                    style={{ width: '80px', height: '80px', left: '-20px', top: '-20px' }}
-                  />
-                  
-                  {/* Marker */}
-                  <div className={`relative w-10 h-10 rounded-full bg-gradient-to-r ${locations.find(l => l.id === activeLocation)?.gradient} flex items-center justify-center`}>
-                    <span className="text-white text-xl">📍</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Location Info Overlay */}
-              <div className="absolute bottom-8 left-8 right-8 glass-card p-6 rounded-xl border border-white/10">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 gradient-text">
-                      {locations.find(l => l.id === activeLocation)?.name}
-                    </h3>
-                    <p className="text-sm text-gray-400">
-                      {locations.find(l => l.id === activeLocation)?.address}
-                    </p>
-                  </div>
-                  <a
-                    href="#"
-                    className="px-4 py-2 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-lg text-sm font-medium text-white hover:opacity-90 transition-opacity"
-                  >
-                    Get Directions
-                  </a>
-                </div>
-              </div>
+            {/* Google Maps Embed - Toggle between Dubai and Nigeria */}
+            <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#0B0616] to-[#1A0F2E] flex items-center justify-center">
+              {activeLocation === 'dubai' && (
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.1899206638504!2d55.783717874490186!3d25.664998277412746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef60bee567a253b%3A0x80fd444807765d7!2sRAKEZ%20Compass%20Coworking%20Centre!5e0!3m2!1sen!2sae!4v1776304743038!5m2!1sen!2sae"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="RAKEZ Compass Coworking Centre Map"
+                ></iframe>
+              )}
+              {activeLocation === 'lagos' && (
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.3793191972622!2d9.790365074045372!3d10.311497189810376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x11ae81c5f81a0657%3A0xd45a10a202f64ca2!2sOtaksi%20Connect!5e0!3m2!1sen!2sae!4v1776305782218!5m2!1sen!2sae"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Otaksi Connect Nigeria Map"
+                ></iframe>
+              )}
             </div>
 
-            {/* Map Attribution */}
-            <p className="text-xs text-center text-gray-600 mt-4">
-              Interactive map integration coming soon. For now, please use the address above.
-            </p>
           </div>
         </motion.div>
       </div>

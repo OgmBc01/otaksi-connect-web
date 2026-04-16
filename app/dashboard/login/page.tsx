@@ -52,8 +52,13 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             <div className="relative w-16 h-16 mx-auto mb-4">
               <div className="absolute inset-0 bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] rounded-2xl blur-xl opacity-50" />
-              <div className="relative w-full h-full rounded-2xl bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF] flex items-center justify-center">
-                <span className="text-2xl font-bold text-white">OC</span>
+              <div className="relative w-full h-full rounded-2xl flex items-center justify-center">
+                {/* Brand logo image replacing 'OC' */}
+                <img
+                  src="/logo.svg"
+                  alt="Otaksi Connect Logo"
+                  style={{ width: '3.5rem', height: '3.5rem', borderRadius: '0.75rem', background: 'white' }}
+                />
               </div>
             </div>
             <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: 'var(--font-clash)' }}>
