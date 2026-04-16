@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import Button from '../ui/Button'
+import Link from 'next/link'
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -310,9 +311,11 @@ export default function Hero() {
           <Button variant="primary" size="default">
             Activate Intelligence
           </Button>
-          <Button variant="secondary" size="default">
-            Observe Solutions
-          </Button>
+          <Link href="/case-studies">
+            <Button variant="secondary" size="default">
+              Observe Solutions
+            </Button>
+          </Link>
         </motion.div>
 
         {/* Scroll Indicator */}
