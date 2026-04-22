@@ -198,21 +198,21 @@ export default function EditPostPage() {
         <div className="flex gap-3">
           <Link
             href="/dashboard/posts"
-            className="admin-button admin-button-secondary bg-white font-semibold px-4 py-2"
+            className="admin-button bg-midnight text-white font-semibold px-4 py-2"
           >
             Cancel
           </Link>
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="admin-button bg-white text-midnight font-semibold px-4 py-2"
+            className="admin-button bg-white text-midnight border border-midnight font-semibold px-4 py-2"
           >
             Save Draft
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="admin-button bg-white text-midnight font-semibold px-4 py-2"
+            className="admin-button bg-white text-midnight border border-midnight font-semibold px-4 py-2"
           >
             {saving ? 'Updating...' : published ? 'Update' : 'Publish'}
           </button>
@@ -294,6 +294,8 @@ export default function EditPostPage() {
               {tags.map((tag) => (
                 <button
                   key={tag.id}
+                  type="button"
+                  aria-pressed={selectedTags.includes(tag.id)}
                   onClick={() => {
                     setSelectedTags(prev =>
                       prev.includes(tag.id)
@@ -301,10 +303,10 @@ export default function EditPostPage() {
                         : [...prev, tag.id]
                     )
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium bg-white text-midnight transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
                     selectedTags.includes(tag.id)
-                      ? 'bg-[#5B6CFF] text-white font-semibold'
-                      : 'hover:bg-[#F3F4F6]'
+                      ? 'bg-[#5B6CFF] text-white font-semibold border-[#5B6CFF]'
+                      : 'bg-white text-midnight border-gray-300 hover:bg-[#F3F4F6]'
                   }`}
                 >
                   {tag.name}

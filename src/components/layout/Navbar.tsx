@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { useAutoLogout } from '@/hooks/useAutoLogout';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -67,13 +66,6 @@ export default function Navbar() {
     return () => { listener?.subscription.unsubscribe(); };
   }, []);
 
-  useAutoLogout(async () => {
-    if (user) {
-      await supabase.auth.signOut();
-      setUser(null);
-      router.push('/');
-    }
-  }, 60 * 60 * 1000);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

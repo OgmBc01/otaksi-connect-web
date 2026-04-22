@@ -291,11 +291,12 @@ export default function BlogClient() {
                         <Link href={`/insights/${post.slug}`}>
                           {/* Featured Image */}
                           {post.featured_image ? (
-                            <div className="relative h-48 overflow-hidden">
+                            <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100">
                               <img
                                 src={post.featured_image}
                                 alt={post.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                style={{ display: 'block', objectFit: 'cover', width: '100%', height: '100%' }}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                             </div>

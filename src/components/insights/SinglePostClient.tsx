@@ -179,17 +179,18 @@ export default function SinglePostClient({ post, relatedPosts }: SinglePostClien
       {/* Featured Image */}
       {post.featured_image && (
         <section className="py-8 bg-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="relative aspect-video rounded-2xl overflow-hidden shadow-xl"
+              className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl border border-gray-100"
             >
               <img
                 src={post.featured_image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain bg-white"
+                style={{ maxHeight: '400px', margin: '0 auto', objectFit: 'contain', display: 'block' }}
               />
             </motion.div>
           </div>
