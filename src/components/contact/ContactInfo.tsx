@@ -14,16 +14,6 @@ const offices = [
     hours: 'Mon - Fri, 9:00 AM - 5:00 PM',
     gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
   },
-  {
-    city: 'Bauchi',
-    country: 'Nigeria',
-    flag: '/images/flags/nigeria.svg',
-    address: ['No: 2 Guru Close, Off Sunday Awoniyi Road, New GRA Bauchi, Nigeria.'],
-    phone: '+234 905 208 7781',
-    email: 'info@otaksiconnect.com',
-    hours: 'Mon - Fri, 8:00 AM - 5:00 PM',
-    gradient: 'from-[#5B6CFF] to-[#FF2E9F]',
-  },
 ]
 
 const socialLinks = [
@@ -127,7 +117,7 @@ export default function ContactInfo() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E9F] to-[#5B6CFF]">Offices</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            We have teams in Dubai and Bauchi ready to help you with your next project.
+            We have a team in Dubai ready to help you with your next project.
           </p>
         </motion.div>
 

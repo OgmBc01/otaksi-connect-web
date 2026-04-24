@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Us | Otaksi Connect',
     description: 'Get in touch with our team in Dubai and Nigeria.',
-    url: 'https://otaksi.ae/contact',
+    url: 'https://otaksiconnect.com/contact',
     siteName: 'Otaksi Connect',
     locale: 'en_AE',
     type: 'website',
