@@ -7,6 +7,7 @@ import FooterClient from '@/components/layout/FooterClient'
 // import { NeuralNetworkProvider } from '@/context/NeuralNetworkContext'
 // import NeuralNetworkCanvas from '@/components/animations/NeuralNetworkCanvas'
 import CookieConsent from '@/components/ui/CookieConsent'
+import Chatbot from '@/components/ui/Chatbot'
 // import { useEffect, useState } from 'react';
 
 const inter = Inter({ 
@@ -45,6 +46,7 @@ export default function RootLayout({
           </div>
           <CookieConsent />
           <FooterClient />
+          <Chatbot />
         {/* </NeuralNetworkProvider> */}
       </body>
     </html>
