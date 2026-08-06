@@ -87,6 +87,17 @@ const menuItems = [
       { name: 'Categories', href: '/dashboard/links/categories', icon: '📂' },
     ],
   },
+  {
+    name: 'Documents',
+    href: '/dashboard/documents',
+    icon: '📄',
+    gradient: 'from-[#FF2E9F] to-[#5B6CFF]',
+    children: [
+      { name: 'All Documents', href: '/dashboard/documents', icon: '📂' },
+      { name: 'Upload New', href: '/dashboard/documents/upload', icon: '⬆️' },
+      { name: 'Categories', href: '/dashboard/documents/categories', icon: '✅' },
+    ],
+  },
   // Contact Submission
   {
     name: 'Contact Submissions',
@@ -380,11 +391,11 @@ export default function DashboardLayout({
         {/* Admin Mesh Background */}
         <div className="admin-mesh-bg" />
         {/* Content wrapper, scrollable and fits above footer */}
-        <div className="flex-1 p-8 overflow-y-auto" style={{ marginBottom: 80 }}>
+        <div className="relative z-10 flex-1 overflow-y-auto p-8" style={{ marginBottom: 80 }}>
           {children}
         </div>
         {/* Footer - Dark purple (admin only, full width, z-10) */}
-        <div className="fixed left-0 right-0 bottom-0 z-10" style={{ height: 80 }}>
+        <div className="fixed left-0 right-0 bottom-0 z-20" style={{ height: 80 }}>
           <footer className="w-full bg-midnight border-t border-white/5 py-6 px-8">
             <div className="flex items-center justify-between max-w-full">
               <p className="text-sm text-gray-500">
